@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.ShortByte.sbTitleAPI.sbTitleAPI;
+import gunpvp.Gunpvp;
 import gunpvp.data.Classic;
 import gunpvp.data.DataManager;
 import gunpvp.listener.Listener;
@@ -216,15 +217,15 @@ public class ClassicClickListener extends Listener {
 											sbTitleAPI.reset(p);
 											sbTitleAPI.sendTitle(p, "§2" + name + "-Kit §afreigeschaltet");
 											sbTitleAPI.sendSubTitle(p, "§7Kontstand§8: §a" + DataManager.getData(p).getStats().getMoney());
-											GunpvpClassicMySQL.setType(p, kit);
+//											GunpvpClassicMySQL.setType(p, kit);
 											e.getView().close();
 										} else {
 											sbTitleAPI.reset(p);
 											sbTitleAPI.sendTitle(p, "§4Zu wenig Geld");
-											sbTitleAPI.sendSubTitle(p, "§7Kontstand§8: §c" + GunpvpMySQL.getMoney(p));
+											sbTitleAPI.sendSubTitle(p, "§7Kontstand§8: §c" + DataManager.getData(p).getStats().getMoney());
 											e.getView().close();
 										}
-										Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+										Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
 											@Override
 											public void run() {
 												p.openInventory(openInv(map, p));

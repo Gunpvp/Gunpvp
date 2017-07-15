@@ -18,6 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 import de.ShortByte.sbTitleAPI.sbTitleAPI;
 import gunpvp.Gunpvp;
 import gunpvp.data.DataManager;
+import gunpvp.data.Stats;
 import gunpvp.listener.Listener;
 import gunpvp.settings.GunpvpScoreboard;
 
@@ -70,6 +71,7 @@ public class ClassicDeathListener extends Listener {
 				Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
 					@Override
 					public void run() {
+						Stats stats = DataManager.getData(p1).getStats();
 						if (!DataManager.getData(p1).getSettings().hasAutoEnabled()) {
 							p1.teleport(new Location(Bukkit.getWorld("Gunpvp"), 0.5, 153.5, 0.5, 90, 0));
 							ItemStack item1 = new ItemStack(Material.COMPASS, 1, (byte) 0);
@@ -84,7 +86,7 @@ public class ClassicDeathListener extends Listener {
 							meta2.setLore(null);
 							item2.setItemMeta(meta2);
 							p1.getInventory().setItem(7, item2);
-							p1.sendMessage("§8§l< §7§lK:§a" + GunpvpMySQL.getKills(p1) + "§8§l | §7§lD:§a" + GunpvpMySQL.getDeaths(p1) + "§8§l | §7§lKD:§a" + GunpvpMySQL.getKD(p1) + "§8§l >");
+							p1.sendMessage("§8§l< §7§lK:§a" + stats.getKills() + "§8§l | §7§lD:§a" + stats.getDeaths() + "§8§l | §7§lKD:§a" + stats.getKD() + "§8§l >");
 						} else {
 							p1.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
 							p1.setGameMode(GameMode.SPECTATOR);
@@ -96,7 +98,7 @@ public class ClassicDeathListener extends Listener {
 							}
 							if (i.get(p1.getName()) == 5) {
 								final Player p2 = p1;
-								final int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(Gunpvp, new Runnable() {
+								final int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(Gunpvp.getPlugin(), new Runnable() {
 									@Override
 									public void run() {
 										sbTitleAPI.reset(p2);
@@ -109,7 +111,7 @@ public class ClassicDeathListener extends Listener {
 									}
 								}, 20L, 20L);
 								final Player p3 = p1;
-								Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp, new Runnable() {
+								Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
 									@Override
 									public void run() {
 										Bukkit.getScheduler().cancelTask(task);
@@ -135,12 +137,13 @@ public class ClassicDeathListener extends Listener {
 				if (k!=null) {
 					final Player kfinal = k;
 					ClassicKillstreak.addKill(k);
-					GunpvpMySQL.addKill(k);
-					GunpvpMySQL.editMoney(k, +5);
+					Stats stats = DataManager.getData(k).getStats();
+					stats.addKill();
+					stats.editMoney(5);
 					ClassicKillBonus.givePlayerKillBonus(k);
-					k.sendMessage("§8§l< §7§lK:§a" + GunpvpMySQL.getKills(k) + "§8§l | §7§lD:§a" + GunpvpMySQL.getDeaths(k) + "§8§l | §7§lKD:§a" + GunpvpMySQL.getKD(k) + "§8§l >");
+					k.sendMessage("§8§l< §7§lK:§a" + stats.getKills() + "§8§l | §7§lD:§a" + stats.getDeaths() + "§8§l | §7§lKD:§a" + stats.getKD() + "§8§l >");
 					Bukkit.broadcastMessage("§8>>> §a" + k.getName() + "§7 tötete §c" + p.getName());
-					Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp, new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
 						@Override
 						public void run() {
 							GunpvpScoreboard.drawScoreBoard(kfinal);
