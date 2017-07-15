@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import gunpvp.arcade.ArcadeSignUpdater;
+import gunpvp.classic.ClassicSignUpdater;
 import gunpvp.commands.Commands;
 import gunpvp.listener.Listeners;
 import gunpvp.util.Action;
@@ -35,6 +36,7 @@ public class Gunpvp extends JavaPlugin {
 		Timer.repeat(new Action() {
 			public void perform() {
 				ArcadeSignUpdater.update();
+				ClassicSignUpdater.update();
 			}
 		}, 0, 10);
 		

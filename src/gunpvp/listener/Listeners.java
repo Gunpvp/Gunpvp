@@ -2,6 +2,9 @@ package gunpvp.listener;
 
 import gunpvp.arcade.ArcadeClickListener;
 import gunpvp.arcade.ArcadeDeathListener;
+import gunpvp.classic.ClassicClickListener;
+import gunpvp.classic.ClassicDeathListener;
+import gunpvp.items.Medipack;
 import gunpvp.settings.SettingsPanel;
 import gunpvp.util.Console;
 
@@ -26,7 +29,11 @@ public class Listeners {
 		new ArcadeDeathListener();
 		new ArcadeClickListener();
 		
+		new ClassicDeathListener();
+		new ClassicClickListener();
+		
 		new SettingsPanel();
+		new Medipack();
 		
 		Console.info("started listeners!");
 		

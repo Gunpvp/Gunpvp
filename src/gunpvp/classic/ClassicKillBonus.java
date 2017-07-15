@@ -10,7 +10,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.shampaggon.crackshot.CSUtility;
 
-import at.breadgames.berni_plays.util.GunpvpMySQL;
+import gunpvp.data.DataManager;
+import gunpvp.data.Settings;
 
 public class ClassicKillBonus {
 	
@@ -22,8 +23,9 @@ public class ClassicKillBonus {
 		if (p != null) {
 			String kit = ClassicItems.getKitFromClassic(p);
 			if (kit != null) {
-				if (GunpvpMySQL.getInfo(p)) p.sendMessage("§aKillbonus §2>>> §b+5 Guncoins§7 erhalten");
-				if (GunpvpMySQL.getInfo(p)) p.sendMessage("§aKillbonus §2>>> §2Killbonus-" + (kit.equalsIgnoreCase("Jugger") ? "Juggernaut" : kit) + "§7 erhalten");
+				Settings settings = DataManager.getData(p).getSettings();
+				if (settings.hasInfoEnabled()) p.sendMessage("§aKillbonus §2>>> §b+5 Guncoins§7 erhalten");
+				if (settings.hasInfoEnabled()) p.sendMessage("§aKillbonus §2>>> §2Killbonus-" + (kit.equalsIgnoreCase("Jugger") ? "Juggernaut" : kit) + "§7 erhalten");
 				switch (kit) {
 				case "Soldier":
 					csu.giveWeapon(p, "Granate", 1);

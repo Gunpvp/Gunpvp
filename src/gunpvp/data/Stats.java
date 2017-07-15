@@ -50,7 +50,7 @@ public class Stats {
 	
 	public void editMoney(int money) {
 		this.money += money;
-		Database.execute("UPDATE `GUNPVP_STATS` SET `MONEY` = "+(money)+" WHERE `UUID` = '"+uuid+"'");
+		Database.execute("UPDATE `GUNPVP_STATS` SET `MONEY` = "+(this.money)+" WHERE `UUID` = '"+uuid+"'");
 	}
 	
 	public double getKD() {

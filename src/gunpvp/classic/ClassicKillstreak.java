@@ -8,7 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import at.breadgames.berni_plays.util.GunpvpMySQL;
+import gunpvp.data.DataManager;
+import gunpvp.data.Settings;
 
 public class ClassicKillstreak {
 	
@@ -54,9 +55,12 @@ public class ClassicKillstreak {
 		meta.setDisplayName("§2§lAmmo");
 		meta.setLore(null);
 		ammo.setItemMeta(meta);
+		
+		Settings settings = DataManager.getData(p).getSettings();
+		
 		switch(kills) {
 		case 3:
-			if (GunpvpMySQL.getInfo(p)) {
+			if (settings.hasInfoEnabled()) {
 				p.sendMessage("§2§lKillstreak §8>>> §b+3 §7Guncoins erhalten!");
 				p.sendMessage("§2§lKillstreak §8>>> §7256xAmmo erhalten!");
 			}
@@ -65,11 +69,11 @@ public class ClassicKillstreak {
 			p.getInventory().addItem(ammo);
 			p.getInventory().addItem(ammo);
 			for (Player all : p.getWorld().getPlayers())
-				if (GunpvpMySQL.getInfo(all))
+				if (DataManager.getData(all).getSettings().hasInfoEnabled())
 					all.sendMessage("§2§lKillstreak §8>>> §a" + p.getName() + "§7 hat eine §b3er§7-Killstreak erzielt!");
 			break;
 		case 5:
-			if (GunpvpMySQL.getInfo(p)) {
+			if (settings.hasInfoEnabled()) {
 				p.sendMessage("§2§lKillstreak §8>>> §b+5 §7Guncoins erhalten!");
 				p.sendMessage("§2§lKillstreak §8>>> §7256xAmmo erhalten!");
 			}
@@ -78,11 +82,11 @@ public class ClassicKillstreak {
 			p.getInventory().addItem(ammo);
 			p.getInventory().addItem(ammo);
 			for (Player all : p.getWorld().getPlayers())
-				if (GunpvpMySQL.getInfo(all))
+				if (DataManager.getData(all).getSettings().hasInfoEnabled())
 					all.sendMessage("§2§lKillstreak §8>>> §a" + p.getName() + "§7 hat eine §b5er§7-Killstreak erzielt!");
 			break;
 		case 8:
-			if (GunpvpMySQL.getInfo(p)) {
+			if (settings.hasInfoEnabled()) {
 				p.sendMessage("§2§lKillstreak §8>>> §b+8 §7Guncoins erhalten!");
 				p.sendMessage("§2§lKillstreak §8>>> §7256xAmmo erhalten!");
 			}
@@ -91,11 +95,11 @@ public class ClassicKillstreak {
 			p.getInventory().addItem(ammo);
 			p.getInventory().addItem(ammo);
 			for (Player all : p.getWorld().getPlayers())
-				if (GunpvpMySQL.getInfo(all))
+				if (DataManager.getData(all).getSettings().hasInfoEnabled())
 					all.sendMessage("§2§lKillstreak §8>>> §a" + p.getName() + "§7 hat eine §b8er§7-Killstreak erzielt!");
 			break;
 		case 10:
-			if (GunpvpMySQL.getInfo(p)) {
+			if (settings.hasInfoEnabled()) {
 				p.sendMessage("§2§lKillstreak §8>>> §b+10 §7Guncoins erhalten!");
 				p.sendMessage("§2§lKillstreak §8>>> §7256xAmmo erhalten!");
 			}
@@ -104,11 +108,11 @@ public class ClassicKillstreak {
 			p.getInventory().addItem(ammo);
 			p.getInventory().addItem(ammo);
 			for (Player all : p.getWorld().getPlayers())
-				if (GunpvpMySQL.getInfo(all))
+				if (DataManager.getData(all).getSettings().hasInfoEnabled())
 					all.sendMessage("§2§lKillstreak §8>>> §a" + p.getName() + "§7 hat eine §b10er§7-Killstreak erzielt!");
 			break;
 		case 15:
-			if (GunpvpMySQL.getInfo(p)) {
+			if (settings.hasInfoEnabled()) {
 				p.sendMessage("§2§lKillstreak §8>>> §b+15 §7Guncoins erhalten!");
 				p.sendMessage("§2§lKillstreak §8>>> §7256xAmmo erhalten!");
 			}
@@ -117,7 +121,7 @@ public class ClassicKillstreak {
 			p.getInventory().addItem(ammo);
 			p.getInventory().addItem(ammo);
 			for (Player all : p.getWorld().getPlayers())
-				if (GunpvpMySQL.getInfo(all))
+				if (DataManager.getData(all).getSettings().hasInfoEnabled())
 					all.sendMessage("§2§lKillstreak §8>>> §a" + p.getName() + "§7 hat eine §b15er§7-Killstreak erzielt!");
 			break;
 		}
