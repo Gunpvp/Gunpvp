@@ -35,6 +35,8 @@ public class Listeners {
 		new SettingsPanel();
 		new Medipack();
 		
+		new DeathListener();
+		
 		Console.info("started listeners!");
 		
 	}

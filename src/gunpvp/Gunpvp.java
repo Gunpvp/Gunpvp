@@ -4,7 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import gunpvp.arcade.ArcadeKillstreak;
 import gunpvp.arcade.ArcadeSignUpdater;
+import gunpvp.classic.ClassicKillstreak;
 import gunpvp.classic.ClassicSignUpdater;
 import gunpvp.commands.Commands;
 import gunpvp.listener.Listeners;
@@ -36,9 +38,11 @@ public class Gunpvp extends JavaPlugin {
 		Timer.repeat(new Action() {
 			public void perform() {
 				ArcadeSignUpdater.update();
+				ArcadeKillstreak.update();
 				ClassicSignUpdater.update();
+				ClassicKillstreak.update();
 			}
-		}, 0, 10);
+		}, 0, 1);
 		
 	}
 	

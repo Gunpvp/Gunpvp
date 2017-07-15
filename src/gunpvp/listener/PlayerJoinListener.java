@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import gunpvp.Titles;
 import gunpvp.data.DataManager;
+import gunpvp.settings.GunpvpScoreboard;
 import gunpvp.util.Action;
 import gunpvp.util.Console;
 import gunpvp.util.Items;
@@ -35,7 +36,7 @@ public class PlayerJoinListener extends Listener {
 				send(p);
 				giveItems(p);
 				
-//				GunpvpScoreboard.drawScoreBoard(p);
+				GunpvpScoreboard.drawScoreBoard(p);
 				
 			}
 		}, 0.1f);
