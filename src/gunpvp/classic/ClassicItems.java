@@ -81,7 +81,7 @@ public class ClassicItems {
 			case "Pyro":
 				csu.giveWeapon(p, "Barret", 1);
 				csu.giveWeapon(p, "USP", 1);
-				csu.giveWeapon(p, "Blendgranate", 5);
+				csu.giveWeapon(p, "Blendgranate", 2);
 				csu.giveWeapon(p, "Granate", 2);
 				csu.giveWeapon(p, "Splittergranate", 3);
 				equipAmmo(p, 4);
@@ -90,10 +90,9 @@ public class ClassicItems {
 			case "Jugger":
 				p.getInventory().addItem(getItem(Material.IRON_SWORD, 2, 0, "§2§lKnife Lvl-2", null));
 				csu.giveWeapon(p, "DesertEagle", 1);
-				csu.giveWeapon(p, "Granate", 2);
-				equipArmor(p, "Lvl-4");
+				csu.giveWeapon(p, "C4", 1);
+				equipArmor(p, "Lvl-2");
 				equipAmmo(p, 2);
-				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
 				p.updateInventory();
 				break;
 			case "Healer":

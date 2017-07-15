@@ -24,7 +24,7 @@ import gunpvp.settings.GunpvpScoreboard;
 
 public class ClassicClickListener extends Listener {
 	
-	private static final int PRIZE = 750;
+	private static final int PRIZE = 300;
 	
 	@EventHandler
 	public void onSignClick(PlayerInteractEvent e) {
