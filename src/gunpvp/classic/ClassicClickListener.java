@@ -217,7 +217,7 @@ public class ClassicClickListener extends Listener {
 											sbTitleAPI.reset(p);
 											sbTitleAPI.sendTitle(p, "§2" + name + "-Kit §afreigeschaltet");
 											sbTitleAPI.sendSubTitle(p, "§7Kontstand§8: §a" + DataManager.getData(p).getStats().getMoney());
-//											GunpvpClassicMySQL.setType(p, kit);
+											Classic.enableKit(kit, p);
 											e.getView().close();
 										} else {
 											sbTitleAPI.reset(p);

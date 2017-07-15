@@ -1,5 +1,9 @@
 package gunpvp.data;
 
+import org.bukkit.entity.Player;
+
+import gunpvp.util.Database;
+
 public class Classic {
 	
 	private int gunner;
@@ -40,6 +44,12 @@ public class Classic {
 
 	public int getBomber() {
 		return bomber;
+	}
+
+	public static void enableKit(String kit, Player player) {
+		DataManager.remove(player);
+		Database.execute("UPDATE `GUNPVP_CLASSIC` SET `"+kit.toUpperCase()+"` = 1 WHERE `UUID` = '"+player.getUniqueId().toString()+"'");
+		DataManager.add(player);
 	}
 	
 }
