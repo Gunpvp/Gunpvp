@@ -10,6 +10,7 @@ import gunpvp.classic.ClassicKillstreak;
 import gunpvp.classic.ClassicSignUpdater;
 import gunpvp.commands.Commands;
 import gunpvp.listener.Listeners;
+import gunpvp.settings.GunpvpScoreboard;
 import gunpvp.util.Action;
 import gunpvp.util.Database;
 import gunpvp.util.Locations;
@@ -41,6 +42,7 @@ public class Gunpvp extends JavaPlugin {
 				ArcadeKillstreak.update();
 				ClassicSignUpdater.update();
 				ClassicKillstreak.update();
+				GunpvpScoreboard.update();
 			}
 		}, 0, 1);
 		
