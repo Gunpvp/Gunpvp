@@ -33,12 +33,8 @@ public class EnderchestMaster extends Listener {
 	@EventHandler
 	public void onInventroyClose(InventoryClickEvent e) {
 		
-		if (e.getInventory().getName().equals(StorageChest.NAME)) {
-			
-			StorageChest chest = getChest(e.getWhoClicked());
-			chest.storeInventory(e.getInventory());
-			
-		}
+		StorageChest chest = getChest(e.getWhoClicked());
+		chest.storeInventory(e.getInventory());
 		
 	}
 	
