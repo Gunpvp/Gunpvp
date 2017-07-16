@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import gunpvp.Titles;
 import gunpvp.data.DataManager;
+import gunpvp.enderchest.EnderchestMaster;
 import gunpvp.settings.GunpvpScoreboard;
 import gunpvp.util.Action;
 import gunpvp.util.Console;
@@ -40,6 +41,7 @@ public class PlayerJoinListener extends Listener {
 				
 			}
 		}, 0.1f);
+		
 	}
 	
 	private void send(Player p) {

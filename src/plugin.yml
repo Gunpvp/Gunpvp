@@ -16,3 +16,6 @@ commands:
   ping:
     description:
     aliases: [p]
+  enderchest:
+    description:
+    aliases: [ec]

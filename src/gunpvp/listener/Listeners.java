@@ -4,6 +4,7 @@ import gunpvp.arcade.ArcadeClickListener;
 import gunpvp.arcade.ArcadeDeathListener;
 import gunpvp.classic.ClassicClickListener;
 import gunpvp.classic.ClassicDeathListener;
+import gunpvp.enderchest.EnderchestMaster;
 import gunpvp.items.Medipack;
 import gunpvp.settings.SettingsPanel;
 import gunpvp.util.Console;
@@ -39,6 +40,7 @@ public class Listeners {
 		
 		new ShopListener();
 		new InteractListener();
+		new EnderchestMaster();
 		
 		Console.info("started listeners!");
 		

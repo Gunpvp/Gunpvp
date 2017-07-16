@@ -10,6 +10,7 @@ public class Commands {
 		new InfoCommand();
 		new ShopCommand();
 		new SpawnCommand();
+		new EnderchestCommand();
 		
 		Console.info("loaded commands!");
 	}
