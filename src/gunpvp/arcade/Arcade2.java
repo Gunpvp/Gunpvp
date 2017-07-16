@@ -32,29 +32,31 @@ public class Arcade2 implements Arcade{
 	
 	@Override
 	public void equip(Player p) {
+		p.getInventory().setItem(6,null);
+		p.updateInventory();
 		csu.giveWeapon(p, "AK-74", 1);
 		csu.giveWeapon(p, "Granate", 2);
 		ItemStack ammo = new ItemStack(Material.SEEDS, 64, (byte) 0);
 		ItemMeta meta = ammo.getItemMeta();
-		meta.setDisplayName("?2?lAmmo");
+		meta.setDisplayName("񗝝Ammo");
 		meta.setLore(null);
 		ammo.setItemMeta(meta);
 		p.getInventory().addItem(ammo);
 		p.getInventory().addItem(ammo);
 		csu.giveWeapon(p, "Granate", 2);
-		sbTitleAPI.sendActionBar(p, "?e?lStandard-Equip erhalten!");
+		sbTitleAPI.sendActionBar(p, "Standard-Equip erhalten!");
 		p.getInventory().setItem(7, null);
 		p.getInventory().setItem(8, null);
 		ItemStack item1 = new ItemStack(Material.IRON_INGOT, 1, (byte) 0);
 		ItemMeta meta1 = item1.getItemMeta();
-		meta1.setDisplayName("?b?lEinstellungen");
+		meta1.setDisplayName("Einstellungen");
 		meta1.setLore(null);
 		item1.setItemMeta(meta1);
 		p.getInventory().setItem(7, item1);
 		p.updateInventory();
 		ItemStack item2 = new ItemStack(Material.BED, 1, (byte) 0);
 		ItemMeta meta2 = item2.getItemMeta();
-		meta2.setDisplayName("?b?lZur?ck zur Lobby");
+		meta2.setDisplayName("Zur點k zur Lobby");
 		meta2.setLore(null);
 		item2.setItemMeta(meta2);
 		p.getInventory().setItem(8, item2);

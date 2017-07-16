@@ -72,6 +72,7 @@ public class PlayerJoinListener extends Listener {
 	
 	private void giveItems(Player p) {
 		p.getInventory().setItem(8, Items.generate("§b§lSpielmodus wählen", Material.COMPASS, 1, 0));
+		p.getInventory().setItem(6, Items.generate("§b§lLucky Packs", Material.TRAPPED_CHEST, 1, 0));
 		p.getInventory().setItem(7, Items.generate("§b§lEinstellungen", Material.IRON_INGOT, 1, 0));
 	}
 	

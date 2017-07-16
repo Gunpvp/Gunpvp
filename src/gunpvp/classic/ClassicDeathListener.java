@@ -73,12 +73,15 @@ public class ClassicDeathListener extends Listener {
 					meta1.setLore(null);
 					item1.setItemMeta(meta1);
 					p.getInventory().setItem(8, item1);
+					p.updateInventory();
 					ItemStack item2 = new ItemStack(Material.IRON_INGOT, 1, (byte) 0);
 					ItemMeta meta2 = item2.getItemMeta();
 					meta2.setDisplayName("§b§lEinstellungen");
 					meta2.setLore(null);
 					item2.setItemMeta(meta2);
-					p.getInventory().setItem(7, item2);
+					p.getInventory().setItem(7,item2);
+					p.updateInventory();
+
 					p.sendMessage("§8§l< §7§lK:§a" + stats.getKills() + "§8§l | §7§lD:§a" + stats.getDeaths()
 							+ "§8§l | §7§lKD:§a" + stats.getKD() + "§8§l >");
 				} else {

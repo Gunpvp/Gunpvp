@@ -12,7 +12,8 @@ public class InventoryClickListener extends Listener {
 			if (e.getCurrentItem().hasItemMeta()) {
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b§lEinstellungen") ||
 						e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b§lSpielmodus wählen") ||
-						e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b§lZurück zur Lobby")) {
+						e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b§lZurück zur Lobby") ||
+						e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§b§lLucky Packs") ) {
 					e.setCancelled(true);
 				}
 			}

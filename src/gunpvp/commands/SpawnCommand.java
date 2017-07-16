@@ -44,6 +44,7 @@ public class SpawnCommand extends Command {
 									}
 								}
 								if (list.size()==0) {
+									p.getInventory().setItem(6,null);
 									p.getInventory().setItem(7, null);
 									p.getInventory().setItem(8, null);
 									ItemStack item1 = new ItemStack(Material.IRON_INGOT, 1, (byte) 0);
@@ -60,6 +61,15 @@ public class SpawnCommand extends Command {
 									item2.setItemMeta(meta2);
 									p.getInventory().setItem(8, item2);
 									p.updateInventory();
+									// creation of chest item
+									ItemStack itemChest=new ItemStack(Material.TRAPPED_CHEST,1,(byte) 0);
+									ItemMeta metaChest=itemChest.getItemMeta();
+									metaChest.setDisplayName("§b§lLucky Packs");
+									metaChest.setLore(null);
+									itemChest.setItemMeta(metaChest);
+                                    p.getInventory().setItem(6, itemChest);
+                                    p.updateInventory();
+									//moving player
 									p.teleport(new Location(Bukkit.getWorld("Gunpvp"), 0.5, 151.5, 0.5, 0, 0));
 									p.sendMessage("§8[§2Gunpvp§8] §aDu wurdest zum Spawn teleportiert!");
 								} else {

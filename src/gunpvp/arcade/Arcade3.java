@@ -32,6 +32,8 @@ public class Arcade3 implements Arcade {
 	
 	@Override
 	public void equip(Player p) {
+		p.getInventory().setItem(6,null);
+		p.updateInventory();
 		csu.giveWeapon(p, "AK-74", 1);
 		csu.giveWeapon(p, "Granate", 2);
 		ItemStack ammo = new ItemStack(Material.SEEDS, 64, (byte) 0);
