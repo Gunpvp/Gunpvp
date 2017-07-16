@@ -2,6 +2,7 @@ package gunpvp.listener;
 
 import gunpvp.arcade.ArcadeClickListener;
 import gunpvp.arcade.ArcadeDeathListener;
+import gunpvp.chest_lottery.LuckyPack;
 import gunpvp.classic.ClassicClickListener;
 import gunpvp.classic.ClassicDeathListener;
 import gunpvp.enderchest.EnderchestMaster;
@@ -35,6 +36,8 @@ public class Listeners {
 		
 		new SettingsPanel();
 		new Medipack();
+
+		new LuckyPack();
 		
 		new DeathListener();
 		

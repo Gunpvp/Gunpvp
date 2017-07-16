@@ -22,7 +22,9 @@ public class PlayerDropItemListener extends Listener {
 			e.setCancelled(true);
 		}
 		if (p.getWorld() == Bukkit.getWorld("Gunpvp")) {
-			if (e.getItemDrop().getItemStack().getType() == Material.SEEDS || e.getItemDrop().getItemStack().getType() == Material.IRON_SPADE) {
+			if (e.getItemDrop().getItemStack().getType() == Material.SEEDS ||
+					e.getItemDrop().getItemStack().getType() == Material.IRON_SPADE||
+                    e.getItemDrop().getItemStack().getType()==Material.TRAPPED_CHEST) {
 				e.setCancelled(true);
 				p.updateInventory();
 				p.sendMessage("§8[§2Gunpvp§8] §cDu kannst hier nichts fallen lassen");

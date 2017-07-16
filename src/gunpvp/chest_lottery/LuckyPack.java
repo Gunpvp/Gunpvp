@@ -1,11 +1,14 @@
 package gunpvp.chest_lottery;
 
+import gunpvp.data.Chests;
+import gunpvp.data.DataManager;
 import gunpvp.listener.Listener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -26,23 +29,32 @@ public class LuckyPack extends Listener{
         }
     }
 
+    @EventHandler
+    public void onClick(InventoryClickEvent e){
+        if(e.getCurrentItem().getType()==Material.CHEST){
+            e.setCancelled(true);
+            String displayName=e.getCurrentItem().getItemMeta().getDisplayName();
+            buy(displayName,e);
+        }
+    }
+
     private static void openPackView(Player p){
 
-        Inventory luckyPackView = Bukkit.createInventory(null, 27, "§b§lLucky Packs");
+        Inventory luckyPackView = Bukkit.createInventory(null, 27, "§8Lucky Packs");
 
-        ItemStack normalPack=new ItemStack(Material.REDSTONE_BLOCK,1);
+        ItemStack normalPack=new ItemStack(Material.CHEST,1);
         ItemMeta normalMeta= normalPack.getItemMeta();
         normalMeta.setDisplayName("Normal Pack");
         normalPack.setItemMeta(normalMeta);
-        ItemStack rarePack=new ItemStack(Material.IRON_BLOCK,1);
+        ItemStack rarePack=new ItemStack(Material.CHEST,1);
         ItemMeta rareMeta= rarePack.getItemMeta();
         rareMeta.setDisplayName("Rare Pack");
         rarePack.setItemMeta(rareMeta);
-        ItemStack specialPack=new ItemStack(Material.GOLD_BLOCK,1);
+        ItemStack specialPack=new ItemStack(Material.CHEST,1);
         ItemMeta specialMeta= specialPack.getItemMeta();
         specialMeta.setDisplayName("Special Pack");
         specialPack.setItemMeta(specialMeta);
-        ItemStack opPack=new ItemStack(Material.DIAMOND_BLOCK,1);
+        ItemStack opPack=new ItemStack(Material.CHEST,1);
         ItemMeta opMeta= opPack.getItemMeta();
         opMeta.setDisplayName("OP Pack");
         opPack.setItemMeta(opMeta);
@@ -54,6 +66,28 @@ public class LuckyPack extends Listener{
 
         p.openInventory(luckyPackView);
 
+    }
+
+    private static boolean buy(String displayName, InventoryClickEvent e){
+        Player p = (Player) e.getWhoClicked();
+        Boolean success=false;
+        Chests playerPacks= DataManager.getData(p).getChests();
+        switch(displayName){
+            case "Normal Pack":
+                success=playerPacks.getNormal()>0;
+                break;
+            case "Rare Pack":
+                success=playerPacks.getRare()>0;
+                break;
+            case "Special Pack":
+                success=playerPacks.getSpecial()>0;
+                break;
+            case "OP Pack":
+                success=playerPacks.getOp()>0;
+                break;
+        }
+        p.sendMessage(e.getCurrentItem().getItemMeta().getDisplayName() + " Erfolgreich: "+ success);
+        return success;
     }
 
 }
