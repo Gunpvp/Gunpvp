@@ -61,89 +61,86 @@ public class ClassicDeathListener extends Listener {
 		DataManager.getData(p).getStats().addDeath();
 
 		p.getInventory().clear();
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
-			@Override
-			public void run() {
-				Stats stats = DataManager.getData(p).getStats();
-				if (!DataManager.getData(p).getSettings().hasAutoEnabled()) {
-					p.teleport(new Location(Bukkit.getWorld("Gunpvp"), 0.5, 153.5, 0.5, 90, 0));
-					ItemStack item1 = new ItemStack(Material.COMPASS, 1, (byte) 0);
-					ItemMeta meta1 = item1.getItemMeta();
-					meta1.setDisplayName("§b§lSpielmodus wählen");
-					meta1.setLore(null);
-					item1.setItemMeta(meta1);
-					p.getInventory().setItem(8, item1);
-					p.updateInventory();
-					ItemStack item2 = new ItemStack(Material.IRON_INGOT, 1, (byte) 0);
-					ItemMeta meta2 = item2.getItemMeta();
-					meta2.setDisplayName("§b§lEinstellungen");
-					meta2.setLore(null);
-					item2.setItemMeta(meta2);
-					p.getInventory().setItem(7,item2);
-					p.updateInventory();
+		
+		Stats stats = DataManager.getData(p).getStats();
+		if (!DataManager.getData(p).getSettings().hasAutoEnabled()) {
+			p.teleport(new Location(Bukkit.getWorld("Gunpvp"), 0.5, 153.5, 0.5, 90, 0));
+			ItemStack item1 = new ItemStack(Material.COMPASS, 1, (byte) 0);
+			ItemMeta meta1 = item1.getItemMeta();
+			meta1.setDisplayName("§b§lSpielmodus wählen");
+			meta1.setLore(null);
+			item1.setItemMeta(meta1);
+			p.getInventory().setItem(8, item1);
+			p.updateInventory();
+			ItemStack item2 = new ItemStack(Material.IRON_INGOT, 1, (byte) 0);
+			ItemMeta meta2 = item2.getItemMeta();
+			meta2.setDisplayName("§b§lEinstellungen");
+			meta2.setLore(null);
+			item2.setItemMeta(meta2);
+			p.getInventory().setItem(7,item2);
+			p.updateInventory();
 
-					p.sendMessage("§8§l< §7§lK:§a" + stats.getKills() + "§8§l | §7§lD:§a" + stats.getDeaths()
-							+ "§8§l | §7§lKD:§a" + stats.getKD() + "§8§l >");
-				} else {
-					p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
-					p.setGameMode(GameMode.SPECTATOR);
-					p.getLocation().setY(p.getLocation().getY() + 5);
-					p.getLocation().setPitch(90);
-					p.teleport(p.getLocation());
-					if (!i.containsKey(p)) {
-						i.put(p.getName(), 5);
-					}
-					if (i.get(p.getName()) == 5) {
-						final int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(Gunpvp.getPlugin(),
-								new Runnable() {
-									@Override
-									public void run() {
-										sbTitleAPI.reset(p);
-										sbTitleAPI.sendTitle(p, "§2§lAutorespawn");
-										int x = i.get(p.getName());
-										x--;
-										i.remove(p);
-										i.put(p.getName(), x);
-										sbTitleAPI.sendSubTitle(p, "§7" + x + "s");
-									}
-								}, 20L, 20L);
-						Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
+			p.sendMessage("§8§l< §7§lK:§a" + stats.getKills() + "§8§l | §7§lD:§a" + stats.getDeaths()
+					+ "§8§l | §7§lKD:§a" + stats.getKD() + "§8§l >");
+		} else {
+			p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
+			p.setGameMode(GameMode.SPECTATOR);
+			p.getLocation().setY(p.getLocation().getY() + 5);
+			p.getLocation().setPitch(90);
+			p.teleport(p.getLocation());
+			if (!i.containsKey(p)) {
+				i.put(p.getName(), 5);
+			}
+			if (i.get(p.getName()) == 5) {
+				final int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(Gunpvp.getPlugin(),
+						new Runnable() {
 							@Override
 							public void run() {
-								Bukkit.getScheduler().cancelTask(task);
 								sbTitleAPI.reset(p);
-								if (i.containsKey(p)) {
-									i.remove(p);
-									i.put(p.getName(), 5);
-								}
-								String map = "Error";
-								switch (p.getWorld().getName()) {
-								case "ClassicBayview":
-									map = "Bayview";
-									break;
-								case "ClassicStudio":
-									map = "Studio";
-									break;
-								case "ClassicMeltdown":
-									map = "Meltdown";
-									break;
-								}
-								ClassicItems.equip(p, ClassicItems.getKitFromClassic(p), map);
+								sbTitleAPI.sendTitle(p, "§2§lAutorespawn");
+								int x = i.get(p.getName());
+								if (x>0) x--;
+								i.remove(p);
+								i.put(p.getName(), x);
+								sbTitleAPI.sendSubTitle(p, "§7" + x + "s");
 							}
-						}, 100L);
+						}, 20L, 20L);
+				Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
+					@Override
+					public void run() {
+						Bukkit.getScheduler().cancelTask(task);
+						sbTitleAPI.reset(p);
+						if (i.containsKey(p)) {
+							i.remove(p);
+							i.put(p.getName(), 5);
+						}
+						String map = "Error";
+						switch (p.getWorld().getName()) {
+						case "ClassicBayview":
+							map = "Bayview";
+							break;
+						case "ClassicStudio":
+							map = "Studio";
+							break;
+						case "ClassicMeltdown":
+							map = "Meltdown";
+							break;
+						}
+						ClassicItems.equip(p, ClassicItems.getKitFromClassic(p), map);
 					}
-				}
-				GunpvpScoreboard.drawScoreBoard(p);
+				}, 100L);
 			}
-		}, 2L);
+		}
+		GunpvpScoreboard.drawScoreBoard(p);
+		
 		if (k != null) {
 			ClassicKillstreak.addKill(k);
-			Stats stats = DataManager.getData(k).getStats();
+			Stats stats_killer = DataManager.getData(k).getStats();
 			stats.addKill();
 			stats.editMoney(5);
 			ClassicKillBonus.givePlayerKillBonus(k);
-			k.sendMessage("§8§l< §7§lK:§a" + stats.getKills() + "§8§l | §7§lD:§a" + stats.getDeaths()
-					+ "§8§l | §7§lKD:§a" + stats.getKD() + "§8§l >");
+			k.sendMessage("§8§l< §7§lK:§a" + stats_killer.getKills() + "§8§l | §7§lD:§a" + stats_killer.getDeaths()
+					+ "§8§l | §7§lKD:§a" + stats_killer.getKD() + "§8§l >");
 			Bukkit.broadcastMessage("§8>>> §a" + k.getName() + "§7 tötete §c" + p.getName());
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
 				@Override

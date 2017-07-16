@@ -1,5 +1,7 @@
 package gunpvp.settings;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Hashtable;
 
 import org.bukkit.Bukkit;
@@ -13,10 +15,11 @@ import org.bukkit.scoreboard.Scoreboard;
 import gunpvp.data.DataManager;
 import gunpvp.data.Stats;
 import gunpvp.scoreboard.ScoreboardType;
+import gunpvp.util.Database;
 
 public class GunpvpScoreboard {
 	
-	private static ScoreboardType st = ScoreboardType.STATS;
+	private static ScoreboardType st = ScoreboardType.TOP10;
 	@SuppressWarnings("unused")
 	private static Hashtable<String, Double> top10 = new Hashtable<String, Double>();
 	private static int time = 0;
@@ -45,20 +48,27 @@ public class GunpvpScoreboard {
 				p.setScoreboard(scoreboard);
 				break;
 			case TOP10:
-//				Scoreboard sbtop10 = Bukkit.getScoreboardManager().getNewScoreboard();
-//				Objective objtop10 = sbtop10.registerNewObjective("....", "....");
-//				objtop10.setDisplaySlot(DisplaySlot.SIDEBAR);
-//				objtop10.setDisplayName("§8[§2§lRANKED§8]");
-//				HashMap<String, Integer> values = getRankedPlayers();
-//				for (String s : values.keySet()) {
-//					Score score = objtop10.getScore(s);
-//					score.setScore(values.get(s)+2);
-//				}
-//				Score score1 = objtop10.getScore("§2§l§m==================");
-//				score1.setScore(1);
-//				Score score2 = objtop10.getScore("§7min. 100 Kills erforderlich");
-//				score2.setScore(0);
-//				p.setScoreboard(sbtop10);
+				Scoreboard sbtop10 = Bukkit.getScoreboardManager().getNewScoreboard();
+				Objective objtop10 = sbtop10.registerNewObjective("....", "....");
+				objtop10.setDisplaySlot(DisplaySlot.SIDEBAR);
+				objtop10.setDisplayName("§8[§2§lRANKED§8]");
+				
+				Top10Data top10 = getRankedPlayers();
+				
+				for (int n = 0;n < 10;n++) {
+					
+					if (top10.getNames()[n]==null) continue;
+					
+					Score score = objtop10.getScore(top10.getNames()[n]+": " +top10.getKDS()[n]);
+					score.setScore(12-n);
+					
+				}
+				
+				Score score1 = objtop10.getScore("§2§l§m==================");
+				score1.setScore(1);
+				Score score2 = objtop10.getScore("§7min. 100 Kills erforderlich");
+				score2.setScore(0);
+				p.setScoreboard(sbtop10);
 				break;		
 			}
 		}
@@ -106,37 +116,70 @@ public class GunpvpScoreboard {
 		}
 	}
 	
-//	private static HashMap<String, Integer> getRankedPlayers() {
-//		return null;
-//		
-//		
-//		ResultSet result = Database.query("SELECT NAME, KD FROM GUNPVP_STATS ORDER BY KD");
-//		
-//		int amount = 10;
-//		if (origindata.size() < 10) amount = origindata.size();
-//		//Filter for best ten + Sort them
-//		Dataline[] data = new Dataline[amount];
-//		int line = amount-1;
-//		while (line >= 0) {
-//			//Get Current-Best
-//			Dataline cbest = new Dataline(".", ".", "0", "1");
-//			for (Dataline dl : origindata) {
-//				if (dl.getKD() >= cbest.getKD()) cbest = dl;
-//			}
-//			//Insert+Remove from Oldlist
-//			if (!cbest.getUUID().equalsIgnoreCase(".")) {
-//				data[line] = cbest;
-//				origindata.remove(cbest);
-//			} else break;
-//			line--;
-//		}
-//		//Convert to Hashmap
-//		HashMap<String, Integer> values = new HashMap<String, Integer>();
-//		for (int i = 0;i<amount;i++) {
-//			String out = "§2" + (amount-i) + ". §7" + data[i].getName() + "§2§l | §a" + data[i].getKD();
-//			values.put(out, i);
-//		}
-//		return values;
-//	}
+	private static Top10Data getRankedPlayers() {
+		
+		double[] kds = new double[10];
+		String[] names = new String[10];
+		
+		try {
+
+			ResultSet result = Database.query("SELECT * FROM `GUNPVP_STATS`");
+			
+			while (result.next()) {
+				
+				int kills = result.getInt("KILLS");
+				int deaths = result.getInt("DEATHS");
+				String name = result.getString("NAME");
+				
+				if (kills > 100 && deaths > 0) {
+					
+					double kd = (kills*1.0) / (deaths*1.0);
+					
+					for (int n = 0;n < 10;n++) {
+						if (kds[n] > kd) {
+							shiftArray(n, kds, names);
+							kds[n] = kd;
+							names[n] = name;
+						}
+					}
+					
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return new Top10Data(names, kds);
+		
+	}
+	
+	private static void shiftArray(int n, double[] top10, String[] names) {
+		for (int x=1;0<=10-n;x++) {
+			top10[10-x] = top10[9-x];
+			top10[10-x] = top10[9-x];
+		}
+	}
+	
+	private static class Top10Data {
+		
+		private String[] names;
+		private double[] kds;
+		
+		public Top10Data(String[] names, double[] kds) {
+			this.names = names;
+			this.kds = kds;
+		}
+
+		public String[] getNames() {
+			return names;
+		}
+
+		public double[] getKDS() {
+			return kds;
+		}
+		
+	}
 	
 }

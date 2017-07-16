@@ -1,6 +1,5 @@
 package gunpvp.listener;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -29,6 +28,8 @@ public class DeathListener extends Listener {
 			e.setCancelled(true);
 			return;
 		}
+		
+		if (e.getCause() == DamageCause.FIRE_TICK || e.getCause() == DamageCause.FIRE) calculateDamage(e, (Player) e.getEntity());
 		
 		if (e.getEntity().getWorld().getName().equals(Locations.GUNPVP.getName())) {
 			e.setCancelled(true);
@@ -80,9 +81,6 @@ public class DeathListener extends Listener {
 	private boolean calculateDamage(EntityDamageEvent e, Player p) {
 		if (e.getDamage(DamageModifier.ARMOR) >= p.getHealth()) {
 			
-			Bukkit.broadcastMessage("Damage-Normal: " + e.getDamage());
-			Bukkit.broadcastMessage("Damage-Armor: " + e.getDamage(DamageModifier.ARMOR));
-			
 			e.setDamage(0);
 			e.setCancelled(true);
 			p.setHealth(p.getMaxHealth());
@@ -107,8 +105,6 @@ public class DeathListener extends Listener {
 		}
 		
 		if (e.getWeaponTitle().equals("&2&lBlendgranate")) damage = 0;
-		
-		Bukkit.broadcastMessage("Damage-Weapon: " + damage);
 		
 		if (damage >= p.getHealth()) {
 			
