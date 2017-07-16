@@ -55,10 +55,20 @@ public class GunpvpScoreboard {
 				
 				Top10Data top10 = getRankedPlayers();
 				
+				int count = 12;
+				
 				for (int n = 0;n < 10;n++) {
 					
-					Score score = objtop10.getScore(top10.getNames()[n]+": " +top10.getKDS()[n]);
-					score.setScore(2+n);
+					if (top10.getNames()[n]==null) {
+						count--;
+						continue;
+					}
+					
+					String spaces = "";
+					for (int x=0;x<18-top10.getNames()[n].length();x++) spaces = spaces + " ";
+					
+					Score score = objtop10.getScore("§7"+top10.getNames()[n]+"§8: "+spaces+ "§a" +String.format("%.3f", top10.getKDS()[n]));
+					score.setScore(count-n);
 					
 				}
 				
@@ -137,6 +147,7 @@ public class GunpvpScoreboard {
 							shiftArray(n, kds, names);
 							kds[n] = kd;
 							names[n] = name;
+							break;
 						}
 					}
 					
@@ -152,9 +163,10 @@ public class GunpvpScoreboard {
 		
 	}
 	
-	private static void shiftArray(int n, double[] top10, String[] names) {
+	private static void shiftArray(int n, double[] kds, String[] names) {
 		for (int x=1;x<10-n;x++) {
-			top10[10-x] = top10[9-x];
+			kds[10-x] = kds[9-x];
+			names[10-x] = names[9-x];
 		}
 	}
 	
