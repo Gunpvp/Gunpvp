@@ -36,6 +36,7 @@ public class DataManager {
 					Database.execute("INSERT INTO GUNPVP_SETTINGS(UUID,AUTO,CHAT,INFO) VALUES ('"+p.getUniqueId().toString()+"', 'false', 'true', 'true')");
 					Database.execute("INSERT INTO GUNPVP_CLASSIC(UUID,GUNNER,RAMBO,PYRO,JUGGER,HEALER,BOMBER) VALUES ('"+p.getUniqueId().toString()+"', '0', '0', '0', '0', '0', '0')");
 					Database.execute("INSERT INTO GUNPVP_ADVENTURERUSH(UUID,WORLD,STEPS) VALUES ('"+p.getUniqueId().toString()+"', 'SPAWN', '0')");
+					Database.execute("INSERT INTO GUNPVP_CHESTS(UUID,NORMAL,RARE,SPECIAL,OP) VALUES ('"+p.getUniqueId().toString()+"',0,0,0,0)");
 
 					Console.info("Created new data for player " + p.getName());
 
@@ -73,9 +74,17 @@ public class DataManager {
 		AdventureRush adventurerush = new AdventureRush(
 				getString(p, "ADVENTURERUSH", "WORLD"),
 				getInt(p, "ADVENTURERUSH", "STEPS"));
-		
+
+        Chests chests=new Chests(
+                p.getUniqueId().toString(),
+                getInt(p,"CHESTS","NORMAL"),
+                getInt(p,"CHESTS","RARE"),
+                getInt(p,"CHESTS","SPECIAL"),
+                getInt(p,"CHESTS","OP")
+        );
+
 		Console.info("Players data was loaded!");
-		return new PlayerData(stats, settings, classic, adventurerush);
+		return new PlayerData(stats, settings, classic, adventurerush, chests);
 	}
 	
 	private static String getString(Player p, String database, String column) {
