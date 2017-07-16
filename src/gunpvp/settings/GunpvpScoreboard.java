@@ -57,10 +57,8 @@ public class GunpvpScoreboard {
 				
 				for (int n = 0;n < 10;n++) {
 					
-					if (top10.getNames()[n]==null) continue;
-					
 					Score score = objtop10.getScore(top10.getNames()[n]+": " +top10.getKDS()[n]);
-					score.setScore(12-n);
+					score.setScore(2+n);
 					
 				}
 				
@@ -68,6 +66,7 @@ public class GunpvpScoreboard {
 				score1.setScore(1);
 				Score score2 = objtop10.getScore("§7min. 100 Kills erforderlich");
 				score2.setScore(0);
+				
 				p.setScoreboard(sbtop10);
 				break;		
 			}
@@ -124,19 +123,17 @@ public class GunpvpScoreboard {
 		try {
 
 			ResultSet result = Database.query("SELECT * FROM `GUNPVP_STATS`");
-			
 			while (result.next()) {
 				
 				int kills = result.getInt("KILLS");
 				int deaths = result.getInt("DEATHS");
 				String name = result.getString("NAME");
-				
 				if (kills > 100 && deaths > 0) {
 					
 					double kd = (kills*1.0) / (deaths*1.0);
-					
+
 					for (int n = 0;n < 10;n++) {
-						if (kds[n] > kd) {
+						if (kds[n] < kd) {
 							shiftArray(n, kds, names);
 							kds[n] = kd;
 							names[n] = name;
@@ -156,8 +153,7 @@ public class GunpvpScoreboard {
 	}
 	
 	private static void shiftArray(int n, double[] top10, String[] names) {
-		for (int x=1;0<=10-n;x++) {
-			top10[10-x] = top10[9-x];
+		for (int x=1;x<10-n;x++) {
 			top10[10-x] = top10[9-x];
 		}
 	}
