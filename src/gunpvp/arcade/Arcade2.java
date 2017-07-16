@@ -38,7 +38,7 @@ public class Arcade2 implements Arcade{
 		csu.giveWeapon(p, "Granate", 2);
 		ItemStack ammo = new ItemStack(Material.SEEDS, 64, (byte) 0);
 		ItemMeta meta = ammo.getItemMeta();
-		meta.setDisplayName("񗝝Ammo");
+		meta.setDisplayName("�2Ammo");
 		meta.setLore(null);
 		ammo.setItemMeta(meta);
 		p.getInventory().addItem(ammo);

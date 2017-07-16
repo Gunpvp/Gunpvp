@@ -48,7 +48,7 @@ public class Arcade1 implements Arcade {
 		p.getInventory().setItem(8, null);
 		ItemStack item1 = new ItemStack(Material.IRON_INGOT, 1, (byte) 0);
 		ItemMeta meta1 = item1.getItemMeta();
-		meta1.setDisplayName("§b§1Einstellungen");
+		meta1.setDisplayName("§b§lEinstellungen");
 		meta1.setLore(null);
 		item1.setItemMeta(meta1);
 		p.getInventory().setItem(7, item1);
