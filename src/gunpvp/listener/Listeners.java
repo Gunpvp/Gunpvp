@@ -37,6 +37,9 @@ public class Listeners {
 		
 		new DeathListener();
 		
+		new ShopListener();
+		new InteractListener();
+		
 		Console.info("started listeners!");
 		
 	}

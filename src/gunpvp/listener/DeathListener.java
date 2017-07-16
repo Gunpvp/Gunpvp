@@ -1,6 +1,8 @@
 package gunpvp.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -75,7 +78,10 @@ public class DeathListener extends Listener {
 	}
 
 	private boolean calculateDamage(EntityDamageEvent e, Player p) {
-		if (e.getDamage() >= p.getHealth()) {
+		if (e.getDamage(DamageModifier.ARMOR) >= p.getHealth()) {
+			
+			Bukkit.broadcastMessage("Damage-Normal: " + e.getDamage());
+			Bukkit.broadcastMessage("Damage-Armor: " + e.getDamage(DamageModifier.ARMOR));
 			
 			e.setDamage(0);
 			e.setCancelled(true);
@@ -89,7 +95,22 @@ public class DeathListener extends Listener {
 	}
 	
 	private boolean calculateWeaponDamage(WeaponDamageEntityEvent e, Player p) {
-		if (e.getDamage() >= p.getHealth()) {
+		
+		double damage = e.getDamage();
+		
+		if (p.getInventory().getChestplate()!=null) {
+			if (p.getInventory().getChestplate().getType() == Material.LEATHER_CHESTPLATE) damage *= 0.72f;
+			if (p.getInventory().getChestplate().getType() == Material.GOLD_CHESTPLATE) damage *= 0.56f;
+			if (p.getInventory().getChestplate().getType() == Material.IRON_CHESTPLATE) damage *= 0.40f;
+			if (p.getInventory().getChestplate().getType() == Material.CHAINMAIL_CHESTPLATE) damage *= 0.52f;
+			if (p.getInventory().getChestplate().getType() == Material.DIAMOND_CHESTPLATE) damage *= 0.20f;
+		}
+		
+		if (e.getWeaponTitle().equals("&2&lBlendgranate")) damage = 0;
+		
+		Bukkit.broadcastMessage("Damage-Weapon: " + damage);
+		
+		if (damage >= p.getHealth()) {
 			
 			e.setDamage(0);
 			e.setCancelled(true);
