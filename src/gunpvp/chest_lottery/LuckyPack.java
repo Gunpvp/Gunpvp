@@ -21,7 +21,7 @@ public class LuckyPack extends Listener{
         Player p = e.getPlayer();
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (p.getItemInHand() != null&&p.getItemInHand().getType()==Material.TRAPPED_CHEST) {
-
+                openPackView(p);
             }
         }
     }
