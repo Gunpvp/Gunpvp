@@ -6,12 +6,14 @@ public class PlayerData {
 	private Settings settings;
 	private Classic classic;
 	private AdventureRush adventurerush;
+	private Chests chests;
 	
-	public PlayerData(Stats stats, Settings settings, Classic classic, AdventureRush adventurerush) {
+	protected PlayerData(Stats stats, Settings settings, Classic classic, AdventureRush adventurerush, Chests chests) {
 		this.stats = stats;
 		this.settings = settings;
 		this.classic = classic;
 		this.adventurerush = adventurerush;
+		this.chests = chests;
 	}
 
 	public Stats getStats() {
@@ -29,5 +31,8 @@ public class PlayerData {
 	public AdventureRush getAdventureRush() {
 		return adventurerush;
 	}
-	
+
+	public Chests getChests() {
+		return chests;
+	}
 }
