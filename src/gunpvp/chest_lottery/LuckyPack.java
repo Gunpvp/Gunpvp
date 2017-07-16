@@ -1,10 +1,12 @@
 package gunpvp.chest_lottery;
 
+import com.shampaggon.crackshot.CSUtility;
 import gunpvp.data.Chests;
 import gunpvp.data.DataManager;
 import gunpvp.listener.Listener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -13,6 +15,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Random;
 
 /**
  * Created by Thomas Langs on 16.07.2017.
@@ -38,23 +42,47 @@ public class LuckyPack extends Listener{
         }
     }
 
+    /**
+     *
+     * @param type 1-4 standing for chest
+     */
+    public static void addChest(int type, Player p){
+        Chests chests = DataManager.getData(p).getChests();
+        switch(type){
+            case 1:
+                chests.editNormal(1);
+                break;
+            case 2:
+                chests.editRare(1);
+                break;
+            case 3:
+                chests.editSpecial(1);
+                break;
+            case 4:
+                chests.editOp(1);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
     private static void openPackView(Player p){
 
         Inventory luckyPackView = Bukkit.createInventory(null, 27, "§8Lucky Packs");
-
-        ItemStack normalPack=new ItemStack(Material.CHEST,1);
+        Chests chests = DataManager.getData(p).getChests();
+        ItemStack normalPack=new ItemStack(Material.CHEST,chests.getNormal());
         ItemMeta normalMeta= normalPack.getItemMeta();
         normalMeta.setDisplayName("Normal Pack");
         normalPack.setItemMeta(normalMeta);
-        ItemStack rarePack=new ItemStack(Material.CHEST,1);
+        ItemStack rarePack=new ItemStack(Material.CHEST, chests.getRare());
         ItemMeta rareMeta= rarePack.getItemMeta();
         rareMeta.setDisplayName("Rare Pack");
         rarePack.setItemMeta(rareMeta);
-        ItemStack specialPack=new ItemStack(Material.CHEST,1);
+        ItemStack specialPack=new ItemStack(Material.CHEST,chests.getSpecial());
         ItemMeta specialMeta= specialPack.getItemMeta();
         specialMeta.setDisplayName("Special Pack");
         specialPack.setItemMeta(specialMeta);
-        ItemStack opPack=new ItemStack(Material.CHEST,1);
+        ItemStack opPack=new ItemStack(Material.CHEST,chests.getOp());
         ItemMeta opMeta= opPack.getItemMeta();
         opMeta.setDisplayName("OP Pack");
         opPack.setItemMeta(opMeta);
@@ -69,11 +97,29 @@ public class LuckyPack extends Listener{
     }
 
     private static boolean buy(String displayName, InventoryClickEvent e){
+        CSUtility csu=new CSUtility();
         Player p = (Player) e.getWhoClicked();
         Boolean success=false;
         Chests playerPacks= DataManager.getData(p).getChests();
         switch(displayName){
             case "Normal Pack":
+                if(playerPacks.getNormal()>0){
+                    Random r=new Random();
+                    int n=r.nextInt(10);
+                    if(n>4&&n<7){
+                        csu.giveWeapon(p,"AT4",1);
+                        ItemStack rocket=new ItemStack(Material.POTATO_ITEM,6);
+                        ItemMeta rocketMeta=rocket.getItemMeta();
+                        rocketMeta.setDisplayName("§2§lAT4-Rocket");
+                        rocket.setItemMeta(rocketMeta);
+                        p.getInventory().addItem(rocket);
+                        p.updateInventory();
+                    }else{
+                        csu.giveWeapon(p,"BLENDGRANATE",5);
+                    }
+                    playerPacks.editNormal(-1);
+
+                }
                 success=playerPacks.getNormal()>0;
                 break;
             case "Rare Pack":
@@ -86,6 +132,7 @@ public class LuckyPack extends Listener{
                 success=playerPacks.getOp()>0;
                 break;
         }
+        p.closeInventory();
         p.sendMessage(e.getCurrentItem().getItemMeta().getDisplayName() + " Erfolgreich: "+ success);
         return success;
     }
