@@ -124,19 +124,18 @@ public class GunpvpScoreboard {
 		try {
 
 			ResultSet result = Database.query("SELECT * FROM `GUNPVP_STATS`");
-			
 			while (result.next()) {
 				
 				int kills = result.getInt("KILLS");
 				int deaths = result.getInt("DEATHS");
 				String name = result.getString("NAME");
-				
+				Bukkit.broadcastMessage(kills + " " + deaths+ " "+ name);
 				if (kills > 100 && deaths > 0) {
 					
 					double kd = (kills*1.0) / (deaths*1.0);
-					
+
 					for (int n = 0;n < 10;n++) {
-						if (kds[n] > kd) {
+						if (kds[n] < kd) {
 							shiftArray(n, kds, names);
 							kds[n] = kd;
 							names[n] = name;
@@ -156,8 +155,7 @@ public class GunpvpScoreboard {
 	}
 	
 	private static void shiftArray(int n, double[] top10, String[] names) {
-		for (int x=1;0<=10-n;x++) {
-			top10[10-x] = top10[9-x];
+		for (int x=1;x<10-n;x++) {
 			top10[10-x] = top10[9-x];
 		}
 	}
