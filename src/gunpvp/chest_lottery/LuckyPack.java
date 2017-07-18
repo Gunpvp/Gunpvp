@@ -1,12 +1,9 @@
 package gunpvp.chest_lottery;
 
-import com.shampaggon.crackshot.CSUtility;
-import gunpvp.data.Chests;
-import gunpvp.data.DataManager;
-import gunpvp.listener.Listener;
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -16,7 +13,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Random;
+import com.shampaggon.crackshot.CSUtility;
+
+import gunpvp.data.Chests;
+import gunpvp.data.DataManager;
+import gunpvp.listener.Listener;
 
 /**
  * Created by Thomas Langs on 16.07.2017.

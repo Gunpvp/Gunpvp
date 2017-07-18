@@ -200,7 +200,7 @@ public class ClassicItems {
 	
 	//******************** TOOLS FOR CLASSIC ********************
 	public static void removeFromClassic(Player p) {
-		if (kit.containsKey(p)) kit.remove(p);
+		kit.remove(p);
 	}
 	
 	public static void addToClassic(Player p, String kit) {

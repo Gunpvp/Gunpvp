@@ -20,7 +20,7 @@ import gunpvp.Gunpvp;
 import gunpvp.data.Classic;
 import gunpvp.data.DataManager;
 import gunpvp.listener.Listener;
-import gunpvp.settings.GunpvpScoreboard;
+import gunpvp.scoreboard.GunpvpScoreboard;
 
 public class ClassicClickListener extends Listener {
 	

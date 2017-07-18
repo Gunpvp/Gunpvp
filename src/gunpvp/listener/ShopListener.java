@@ -18,7 +18,7 @@ import com.shampaggon.crackshot.CSUtility;
 import de.ShortByte.sbTitleAPI.sbTitleAPI;
 import gunpvp.data.DataManager;
 import gunpvp.data.Stats;
-import gunpvp.settings.GunpvpScoreboard;
+import gunpvp.scoreboard.GunpvpScoreboard;
 
 public class ShopListener extends Listener {
 	

@@ -1,5 +1,7 @@
 package gunpvp.data;
 
+import org.bukkit.entity.Player;
+
 import gunpvp.util.Database;
 
 public class Stats {
@@ -63,5 +65,10 @@ public class Stats {
 		kd = (double) Math.round(kd * 1000d) / 1000d;
 		return kd;
 	}
+	
+	public void showStats(Player player) {
+		player.sendMessage("§8§l< §7§lK:§a" + kills + "§8§l | §7§lD:§a" + deaths + "§8§l | §7§lKD:§a" + getKD() + "§8§l >");
+	}
+
 	
 }

@@ -24,7 +24,6 @@ public class ClassicKillBonus {
 			String kit = ClassicItems.getKitFromClassic(p);
 			if (kit != null) {
 				Settings settings = DataManager.getData(p).getSettings();
-				if (settings.hasInfoEnabled()) p.sendMessage("§aKillbonus §2>>> §b+5 Guncoins§7 erhalten");
 				if (settings.hasInfoEnabled()) p.sendMessage("§aKillbonus §2>>> §2Killbonus-" + (kit.equalsIgnoreCase("Jugger") ? "Juggernaut" : kit) + "§7 erhalten");
 				switch (kit) {
 				case "Soldier":

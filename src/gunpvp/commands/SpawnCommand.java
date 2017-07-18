@@ -1,18 +1,13 @@
 package gunpvp.commands;
 
-import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import de.ShortByte.sbTitleAPI.sbTitleAPI;
+import gunpvp.util.Lobby;
 
 public class SpawnCommand extends Command {
 	
@@ -34,58 +29,32 @@ public class SpawnCommand extends Command {
 						cmd.getName().equals("s")) {
 					if (p.getWorld()!=Bukkit.getWorld("Gunpvp")) {
 						if (p.getWorld() != Bukkit.getWorld("ZombieForest")) {
-							if (p.getName()==p.getName()) { // TODO ANTICHEAT
-								ArrayList<Player> list = new ArrayList<Player>();
+							
+							if (p.getHealth() > p.getMaxHealth() * (3f/4f)) {
+								
 								for (Entity en : p.getNearbyEntities(25, 25, 25)) {
 									if (en instanceof Player) {
 										if ((Player) en != p) {
-											list.add(p);
+											p.sendMessage("§8[§2Gunpvp§8] §cJemand ist in deiner Nähe! Es darf niemand");
+											p.sendMessage("§8[§2Gunpvp§8] §cim Umkreis von 25 Blöcken um dich sein!");
+											return false;
 										}
 									}
 								}
-								if (list.size()==0) {
-									p.getInventory().setItem(6,null);
-									p.getInventory().setItem(7, null);
-									p.getInventory().setItem(8, null);
-									ItemStack item1 = new ItemStack(Material.IRON_INGOT, 1, (byte) 0);
-									ItemMeta meta1 = item1.getItemMeta();
-									meta1.setDisplayName("§b§lEinstellungen");
-									meta1.setLore(null);
-									item1.setItemMeta(meta1);
-									p.getInventory().setItem(7, item1);
-									p.updateInventory();
-									ItemStack item2 = new ItemStack(Material.COMPASS, 1, (byte) 0);
-									ItemMeta meta2 = item2.getItemMeta();
-									meta2.setDisplayName("§b§lSpielmodus wählen");
-									meta2.setLore(null);
-									item2.setItemMeta(meta2);
-									p.getInventory().setItem(8, item2);
-									p.updateInventory();
-									// creation of chest item
-									ItemStack itemChest=new ItemStack(Material.TRAPPED_CHEST,1,(byte) 0);
-									ItemMeta metaChest=itemChest.getItemMeta();
-									metaChest.setDisplayName("§b§lLucky Packs");
-									metaChest.setLore(null);
-									itemChest.setItemMeta(metaChest);
-                                    p.getInventory().setItem(6, itemChest);
-                                    p.updateInventory();
-									//moving player
-									p.teleport(new Location(Bukkit.getWorld("Gunpvp"), 0.5, 151.5, 0.5, 0, 0));
-									p.sendMessage("§8[§2Gunpvp§8] §aDu wurdest zum Spawn teleportiert!");
-								} else {
-									p.sendMessage("§8[§2Gunpvp§8] §cJemand ist in deiner Nähe! Es darf niemand");
-									p.sendMessage("§8[§2Gunpvp§8] §cim Umkreis von 25 Blöcken um dich sein!");
-								}
+								Lobby.reset(p);
+								Lobby.giveItems(p);
+								p.sendMessage("§8[§2Gunpvp§8] §aDu wurdest zum Spawn teleportiert!");
+								
 							} else {
-								sbTitleAPI.sendActionBar(p, "§c§lDu musst noch warten, da du gerade Schaden erlitten hast!");
+								sbTitleAPI.sendActionBar(p, "§c§lUm zum Spawn zu gelangen benötigst du mindstens 3/4 deiner Leben!");
 								
 							}
 						} else {
-							p.sendMessage("§8[§2Gunpvp§8] §cDu kannst dich nicht aus");
-							p.sendMessage("§8[§2Gunpvp§8] §cdem Zombie-Modus teleportieren!");
+							p.sendMessage("§8[§2Gunpvp§8] §cDu kannst dich nicht aus dem Zombie-Modus teleportieren!");
 						}
 					} else {
-						p.teleport(new Location(Bukkit.getWorld("Gunpvp"), 0.5, 151.5, 0.5, 0, 0));
+						Lobby.reset(p);
+						Lobby.giveItems(p);
 						p.sendMessage("§8[§2Gunpvp§8] §aDu wurdest zum Spawn teleportiert!");
 					}
 				}

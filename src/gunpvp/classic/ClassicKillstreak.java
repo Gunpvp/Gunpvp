@@ -2,14 +2,13 @@ package gunpvp.classic;
 
 import java.util.Hashtable;
 
-import gunpvp.chest_lottery.LuckyPack;
-import gunpvp.data.Chests;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import gunpvp.chest_lottery.LuckyPack;
 import gunpvp.data.DataManager;
 import gunpvp.data.Settings;
 
@@ -70,7 +69,6 @@ public class ClassicKillstreak {
 			p.getInventory().addItem(ammo);
 			p.getInventory().addItem(ammo);
 			p.getInventory().addItem(ammo);
-            Chests chests=DataManager.getData(p).getChests();
 			for (Player all : p.getWorld().getPlayers())
 				if (DataManager.getData(all).getSettings().hasInfoEnabled())
 					all.sendMessage("§2§lKillstreak §8>>> §a" + p.getName() + "§7 hat eine §b3er§7-Killstreak erzielt!");

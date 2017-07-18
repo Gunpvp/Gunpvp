@@ -17,7 +17,10 @@ import com.shampaggon.crackshot.events.WeaponDamageEntityEvent;
 
 import gunpvp.arcade.ArcadeDeathListener;
 import gunpvp.classic.ClassicDeathListener;
+import gunpvp.scoreboard.GunpvpScoreboard;
+import gunpvp.util.Action;
 import gunpvp.util.Locations;
+import gunpvp.util.Timer;
 
 public class DeathListener extends Listener {
 	
@@ -29,7 +32,7 @@ public class DeathListener extends Listener {
 			return;
 		}
 		
-		if (e.getCause() == DamageCause.FIRE_TICK || e.getCause() == DamageCause.FIRE) calculateDamage(e, (Player) e.getEntity());
+		if (e.getCause() == DamageCause.FIRE_TICK || e.getCause() == DamageCause.FIRE) e.setCancelled(true);
 		
 		if (e.getEntity().getWorld().getName().equals(Locations.GUNPVP.getName())) {
 			e.setCancelled(true);
@@ -104,8 +107,6 @@ public class DeathListener extends Listener {
 			if (p.getInventory().getChestplate().getType() == Material.DIAMOND_CHESTPLATE) damage *= 0.20f;
 		}
 		
-		if (e.getWeaponTitle().equals("&2&lBlendgranate")) damage = 0;
-		
 		if (damage >= p.getHealth()) {
 			
 			e.setDamage(0);
@@ -132,8 +133,22 @@ public class DeathListener extends Listener {
 			k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
 		}
 		
-		if (p.getWorld().getName().startsWith("Arcade")) ArcadeDeathListener.onDeath(p, k);
-		if (p.getWorld().getName().startsWith("Classic")) ClassicDeathListener.onDeath(p, k);
+		Player killer = k;
+		Player player = p;
+		
+		Timer.delay(new Action() {
+			public void perform() {
+				if (p.getWorld().getName().startsWith("Arcade")) ArcadeDeathListener.onDeath(player, killer);
+				if (p.getWorld().getName().startsWith("Classic")) ClassicDeathListener.onDeath(player, killer);
+			}
+		}, 0.1f);
+		
+		Timer.sync(new Action() {
+			public void perform() {
+				GunpvpScoreboard.drawScoreBoard(player);
+				if (killer != null) GunpvpScoreboard.drawScoreBoard(killer);
+			}
+		}, 0.5f);
 		
 	}
 	

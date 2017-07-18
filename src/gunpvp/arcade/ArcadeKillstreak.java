@@ -15,7 +15,6 @@ import com.shampaggon.crackshot.CSUtility;
 
 import gunpvp.data.DataManager;
 import gunpvp.data.Settings;
-import gunpvp.data.Stats;
 
 public class ArcadeKillstreak {
 	
@@ -63,7 +62,6 @@ public class ArcadeKillstreak {
 		meta.setLore(null);
 		ammo.setItemMeta(meta);
 		
-		Stats stats = DataManager.getData(p).getStats();
 		Settings settings = DataManager.getData(p).getSettings();
 		
 		switch(kills) {
