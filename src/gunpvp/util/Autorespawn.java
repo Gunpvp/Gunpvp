@@ -28,10 +28,14 @@ public class Autorespawn {
 		/**
 		 * bind respawn effects to player
 		 */
-		p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
-		p.setGameMode(GameMode.SPECTATOR);
-		p.getLocation().setY(p.getLocation().getY() + 5);
-		p.getLocation().setPitch(90);
+		Timer.sync(new Action() {
+			public void perform() {
+				p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
+				p.setGameMode(GameMode.SPECTATOR);
+				p.getLocation().setY(p.getLocation().getY() + 5);
+				p.getLocation().setPitch(90);
+			}
+		}, 0.1f);
 		
 		/**
 		 * add player into map
@@ -55,7 +59,7 @@ public class Autorespawn {
 				sbTitleAPI.sendSubTitle(p, "§7" + time_remaining + "s");
 				
 			}
-		}, 0f, 1f);
+		}, 1f, 1f);
 		
 		/**
 		 * start timer for respawning

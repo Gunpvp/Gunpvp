@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import com.shampaggon.crackshot.events.WeaponDamageEntityEvent;
 
@@ -23,6 +24,13 @@ import gunpvp.util.Locations;
 import gunpvp.util.Timer;
 
 public class DeathListener extends Listener {
+	
+	private static DeathListener instance;
+	
+	public DeathListener() {
+		instance = this;
+	}
+	
 	
 	@EventHandler (priority=EventPriority.HIGHEST)
 	public void onDamage(EntityDamageEvent e) {
@@ -95,6 +103,16 @@ public class DeathListener extends Listener {
 		}
 	}
 	
+	public void damagePlayer(double damage, Player p) {
+		if (damage >= p.getHealth()) {
+			
+			p.setHealth(p.getMaxHealth());
+			
+			executeVirtualDeath(p, null);
+			
+		}
+	}
+	
 	private boolean calculateWeaponDamage(WeaponDamageEntityEvent e, Player p) {
 		
 		double damage = e.getDamage();
@@ -145,11 +163,16 @@ public class DeathListener extends Listener {
 		
 		Timer.sync(new Action() {
 			public void perform() {
+				p.setVelocity(new Vector(0, 2, 0));
 				GunpvpScoreboard.drawScoreBoard(player);
 				if (killer != null) GunpvpScoreboard.drawScoreBoard(killer);
 			}
-		}, 0.5f);
+		}, 0.05f);
 		
+	}
+	
+	public static DeathListener getInstance() {
+		return instance;
 	}
 	
 }

@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import de.ShortByte.sbTitleAPI.sbTitleAPI;
 import gunpvp.util.Lobby;
 
 public class SpawnCommand extends Command {
@@ -46,7 +45,7 @@ public class SpawnCommand extends Command {
 								p.sendMessage("§8[§2Gunpvp§8] §aDu wurdest zum Spawn teleportiert!");
 								
 							} else {
-								sbTitleAPI.sendActionBar(p, "§c§lUm zum Spawn zu gelangen benötigst du mindstens 3/4 deiner Leben!");
+								p.sendMessage("§c§lUm zum Spawn zu gelangen benötigst du mindstens 3/4 deiner Leben!");
 								
 							}
 						} else {

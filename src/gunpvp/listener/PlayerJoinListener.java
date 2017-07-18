@@ -21,7 +21,7 @@ public class PlayerJoinListener extends Listener {
 		event.setJoinMessage("§a>> §7" + p.getName());
 		Console.info(p.getName() + " has joined to the server!");
 		
-		Timer.delay(new Action() {
+		Timer.sync(new Action() {
 			public void perform() {
 				
 				DataManager.add(p);
@@ -29,14 +29,10 @@ public class PlayerJoinListener extends Listener {
 				Lobby.reset(p);
 				Lobby.send(p);
 				Lobby.giveItems(p);
-			}
-		}, 0.1f);
-		
-		Timer.sync(new Action() {
-			public void perform() {
+				
 				GunpvpScoreboard.drawScoreBoard(p);
 			}
-		}, 1);
+		}, 0.1f);
 		
 	}
 	

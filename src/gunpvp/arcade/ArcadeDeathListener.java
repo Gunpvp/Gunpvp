@@ -1,5 +1,8 @@
 package gunpvp.arcade;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -12,36 +15,36 @@ import de.ShortByte.sbTitleAPI.sbTitleAPI;
 import gunpvp.data.DataManager;
 import gunpvp.data.Settings;
 import gunpvp.data.Stats;
+import gunpvp.listener.DeathListener;
 import gunpvp.listener.Listener;
 import gunpvp.util.Action;
 import gunpvp.util.ArmorManager;
 import gunpvp.util.Autorespawn;
 import gunpvp.util.Lobby;
 import gunpvp.util.Locations;
+import gunpvp.util.Timer;
 
 public class ArcadeDeathListener extends Listener {
 
 	private static final int KILL_REWARD = 5;
-
+	private static List<String> water_timeout = new ArrayList<String>();
+	
 	/**
 	 * kill player if he/she jumps into water
 	 */
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
-		if (p.getWorld() == Locations.ARCADE_CARRIER && p.getGameMode() == GameMode.SURVIVAL) {
+		if (p.getWorld() == Locations.ARCADE_CARRIER && p.getGameMode() == GameMode.SURVIVAL && !water_timeout.contains(p.getName())) {
 			if (p.getLocation().getBlockY() < 25) {
-				if (p.getHealth() > 0.0) {
-					p.damage(100.0);
-					return;
-				}
-			}
-			if (p.getWorld().getBlockAt(p.getLocation()).getType() == Material.WATER
-					|| p.getWorld().getBlockAt(p.getLocation()).getType() == Material.STATIONARY_WATER) {
-				if (p.getHealth() > 0.0) {
-					p.damage(100.0);
-					return;
-				}
+				DeathListener.getInstance().damagePlayer(100, p);
+				water_timeout.add(p.getName());
+				Timer.delay(new Action() {
+					public void perform() {
+						water_timeout.remove(p.getName());
+					}
+				}, 2f);
+				return;
 			}
 		}
 	}
@@ -66,26 +69,33 @@ public class ArcadeDeathListener extends Listener {
 		ArmorManager.damageArmor(p.getInventory());
 		
 		/**
-		 * drop items of inventory with some exceptions
+		 * sync with server
 		 */
-		for (ItemStack item : p.getInventory()) {
-			if (item != null) {
-				if (
-						item.getType() != Material.IRON_SPADE
-						&& item.getType() != Material.SEEDS
-						&& item.getType() != Material.BED
-						&& item.getType() != Material.IRON_INGOT) {
-					
-					p.getWorld().dropItem(p.getLocation(), item);
-					
+		Timer.sync(new Action() {
+			public void perform() {
+				/**
+				 * drop items of inventory with some exceptions
+				 */
+				for (ItemStack item : p.getInventory()) {
+					if (item != null) {
+						if (
+								item.getType() != Material.IRON_SPADE
+								&& item.getType() != Material.SEEDS
+								&& item.getType() != Material.BED
+								&& item.getType() != Material.IRON_INGOT) {
+							
+							p.getWorld().dropItem(p.getLocation(), item);
+							
+						}
+					}
 				}
+				
+				/**
+				 * clear inventory
+				 */
+				p.getInventory().clear();
 			}
-		}
-		
-		/**
-		 * clear inventory
-		 */
-		p.getInventory().clear();
+		}, 0.1f);
 
 		/**
 		 * check if player has autorespawning enabled
@@ -95,18 +105,22 @@ public class ArcadeDeathListener extends Listener {
 			Autorespawn.respawn(p, new Action() {
 				public void perform() {
 					
-					Arcade arcade = null;
-					if (p.getWorld() == Locations.ARCADE_GRIND) arcade = new Arcade1();
-					if (p.getWorld() == Locations.ARCADE_GRIND) arcade = new Arcade2();
-					if (p.getWorld() == Locations.ARCADE_GRIND) arcade = new Arcade3();
-					if (arcade != null) {
-						arcade.teleport(p);
-						sbTitleAPI.clear(p);
-						p.setGameMode(GameMode.SURVIVAL);
-						arcade.equip(p);
-						arcade.deleteObject();
-					}
-					
+					Timer.sync(new Action() {
+						public void perform() {
+							Arcade arcade = null;
+							if (p.getWorld() == Locations.ARCADE_GRIND) arcade = new ArcadeGrind();
+							if (p.getWorld() == Locations.ARCADE_RAID) arcade = new ArcadeRaid();
+							if (p.getWorld() == Locations.ARCADE_CARRIER) arcade = new ArcadeCarrier();
+							if (arcade != null) {
+								arcade.teleport(p);
+								arcade.equip(p);
+								arcade.deleteObject();
+								sbTitleAPI.clear(p);
+								p.setGameMode(GameMode.SURVIVAL);
+							}
+						}
+					}, 0.1f);
+
 				}
 			});
 			

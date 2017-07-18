@@ -28,9 +28,9 @@ public class ClassicItems {
 		//******************** MAP CHOOSE + CLEAR ********************
 		Classic cla = null;
 		switch (map) {
-		case "Bayview": cla = new Classic1(); break;
-		case "Studio": cla = new Classic2(); break;
-		case "Meltdown": cla = new Classic3(); break;
+		case "Bayview": cla = new ClassicBayview(); break;
+		case "Studio": cla = new ClassicStudio(); break;
+		case "Meltdown": cla = new ClassicMetldown(); break;
 		}
 		if (cla != null) {
 			cla.teleport(p);

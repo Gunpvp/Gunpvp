@@ -16,7 +16,7 @@ import com.shampaggon.crackshot.CSUtility;
 
 import de.ShortByte.sbTitleAPI.sbTitleAPI;
 
-public class Arcade1 implements Arcade {
+public class ArcadeGrind implements Arcade {
 	
 	private CSUtility csu = new CSUtility();
 	private static int beforebeforelast = new Random().nextInt(10);

@@ -22,9 +22,9 @@ public class ArcadeClickListener extends Listener {
 					Sign s = (Sign) e.getClickedBlock().getState();
 					Arcade arc = null;
 					switch (s.getLine(1)) {
-					case "Grind": arc = new Arcade1(); break;
-					case "Raid": arc = new Arcade2(); break;
-					case "Carrier": arc = new Arcade3(); break;
+					case "Grind": arc = new ArcadeGrind(); break;
+					case "Raid": arc = new ArcadeRaid(); break;
+					case "Carrier": arc = new ArcadeCarrier(); break;
 					}
 					if (arc != null) {
 						arc.teleport(p);

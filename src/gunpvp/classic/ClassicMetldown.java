@@ -7,9 +7,9 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-public class Classic2 implements Classic {
+public class ClassicMetldown implements Classic {
 	
-	private static int classic = 2;
+	private static int classic = 3;
 	private static int beforebeforelast = new Random().nextInt(10);
 	private static int beforelast = new Random().nextInt(10);
 	private static int last = new Random().nextInt(10);
@@ -28,17 +28,17 @@ public class Classic2 implements Classic {
 		beforebeforelast = beforelast;
 		beforelast = last;
 		last = r;
-		World w = Bukkit.getWorld("ClassicStudio");
-		Location loc0 = new Location(w, -1092.5, 12.3, 898.5, 165f, 0.0f);
-		Location loc1 = new Location(w, -1112.5, 15, 900.5, -90f, 10.0f);
-		Location loc2 = new Location(w, -1169.5, 13.5, 907.5, -170f, 0.0f);
-		Location loc3 = new Location(w, -1166.5, 10.5, 883.55, -15f, 0.0f);
-		Location loc4 = new Location(w, -1124.5, 16.7, 914.5, -55f, 0.0f);
-		Location loc5 = new Location(w, -1124.5, 16, 864.5, 125f, 10f);
-		Location loc6 = new Location(w, -1135.5, 19.5, 892.5, -65f, 0.0f);
-		Location loc7 = new Location(w, -1101.5, 12.5, 936.5, 100f, 0.0f);
-		Location loc8 = new Location(w, -1185.5, 10.5, 885.5, -140f, 0.0f);
-		Location loc9 = new Location(w, -1150.5, 11.5, 858.5, 90f, 10.0f);
+		World w = Bukkit.getWorld("ClassicMeltdown");
+		Location loc0 = new Location(w, -1103.5, 37.5, -992.5, 135f, 4f);
+		Location loc1 = new Location(w, -1095.5, 37.5, -1016.5, 0f, 0f);
+		Location loc2 = new Location(w, -1125.5, 33.5, -1009.5, -80f, 0f);
+		Location loc3 = new Location(w, -1103.5, 33.5, -970.5, 100f, 0f);
+		Location loc4 = new Location(w, -1072.5, 37.5, -978.5, -145f, 0f);
+		Location loc5 = new Location(w, -1025.5, 33.5, -963.5, 145f, 0f);
+		Location loc6 = new Location(w, -1017.5 , 37.5, -994.5, 145f, 0f);
+		Location loc7 = new Location(w, -1016.5, 33.5, -1016.5, 40f, 0f);
+		Location loc8 = new Location(w, -1059.5, 37.5, -1017.5, 0f, 0f);
+		Location loc9 = new Location(w, -1044.5, 37.5, -963.5, 125f, 0f);
 		switch(r) {
 		case 0: p.teleport(loc0); break;
 		case 1: p.teleport(loc1); break;

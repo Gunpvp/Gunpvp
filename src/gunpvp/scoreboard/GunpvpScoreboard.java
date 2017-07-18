@@ -57,6 +57,7 @@ public class GunpvpScoreboard {
 				initScoreboard("§8[§2§lRANKED§8]");
 				
 				count = 12;
+				if (top10==null) top10 = clacTop10();
 				
 				for (int n = 0;n < 10;n++) {
 					

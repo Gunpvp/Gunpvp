@@ -1,38 +1,58 @@
 package gunpvp.classic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import de.ShortByte.sbTitleAPI.sbTitleAPI;
 import gunpvp.data.DataManager;
 import gunpvp.data.Settings;
 import gunpvp.data.Stats;
+import gunpvp.listener.DeathListener;
 import gunpvp.listener.Listener;
 import gunpvp.util.Action;
 import gunpvp.util.Autorespawn;
 import gunpvp.util.Lobby;
 import gunpvp.util.Locations;
+import gunpvp.util.Timer;
 
 public class ClassicDeathListener extends Listener {
 
 	private static final int KILL_REWARD = 5;
-
+	private static List<String> water_timeout = new ArrayList<String>();
 	/**
 	 * kill player if he/she jumps into water
 	 */
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
-		if (p.getGameMode() == GameMode.SURVIVAL) {
+		if (p.getGameMode() == GameMode.SURVIVAL && !water_timeout.contains(p.getName())) {
 			
 			if (p.getWorld() == Locations.CLASSIC_BAYVIEW)
-				if (p.getLocation().getBlockY() < 8) p.damage(100);
+				if (p.getLocation().getBlockY() < 8) {
+					water_timeout.add(p.getName());
+					DeathListener.getInstance().damagePlayer(100, p);
+					Timer.delay(new Action() {
+						public void perform() {
+							water_timeout.remove(p.getName());
+						}
+					}, 0.5f);
+				}
 			
 			if (p.getWorld() == Locations.CLASSIC_MELTDOWN) {
 				if (p.getLocation().getBlockY() < 27) {
-					if (p.getHealth() > 0.0) p.setHealth(0.0);
+					DeathListener.getInstance().damagePlayer(100, p);
+					water_timeout.add(p.getName());
+					Timer.delay(new Action() {
+						public void perform() {
+							water_timeout.remove(p.getName());
+						}
+					}, 0.5f);
 				}
 			}
 			
@@ -62,7 +82,23 @@ public class ClassicDeathListener extends Listener {
 			
 			Autorespawn.respawn(p, new Action() {
 				public void perform() {
-					if (p.isOnline()) ClassicItems.equip(p, ClassicItems.getKitFromClassic(p), p.getWorld().getName());
+					if (p.isOnline()) {
+						Timer.sync(new Action() {
+							public void perform() {
+								Classic classic = null;
+								if (p.getWorld() == Locations.CLASSIC_BAYVIEW) classic = new ClassicBayview();
+								if (p.getWorld() == Locations.CLASSIC_STUDIO) classic = new ClassicStudio();
+								if (p.getWorld() == Locations.CLASSIC_MELTDOWN) classic = new ClassicMetldown();
+								if (classic != null) {
+									classic.teleport(p);
+									sbTitleAPI.clear(p);
+									p.setGameMode(GameMode.SURVIVAL);
+									ClassicItems.equip(p, ClassicItems.getKitFromClassic(p), p.getWorld().getName());
+									classic.deleteObject();
+								} 
+							}
+						}, 0.1f);
+					}
 				}
 			});
 			

@@ -16,14 +16,14 @@ import com.shampaggon.crackshot.CSUtility;
 
 import de.ShortByte.sbTitleAPI.sbTitleAPI;
 
-public class Arcade2 implements Arcade{
+public class ArcadeCarrier implements Arcade {
 	
 	private CSUtility csu = new CSUtility();
 	private static int beforebeforelast = new Random().nextInt(10);
 	private static int beforelast = new Random().nextInt(10);
 	private static int last = new Random().nextInt(10);
 	private static int r = new Random().nextInt(10);
-	private static final int arcade = 2;
+	private static final int arcade = 3;
 	
 	@Override
 	public int getArcade() {
@@ -74,18 +74,17 @@ public class Arcade2 implements Arcade{
 		beforelast = last;
 		last = r;
 		
-		World w = Bukkit.getWorld("ArcadeRaid");
-		Location loc0 = new Location(w, -961.5, 47.5, -1047.5, -103.0f, 19.5f);
-		Location loc1 = new Location(w, -953.5, 49.5, -1023.5, -160.0f, 3.5f);
-		Location loc2 = new Location(w, -995.5, 47.5, -1004.5, 20.0f, -9.5f);
-		Location loc3 = new Location(w, -1021.5, 43.5, -1105.5, 40.0f, -7.5f);
-		Location loc4 = new Location(w, -958.5, 43.5, -1091.5, -120.0f, -6.3f);
-		Location loc5 = new Location(w, -948.5, 55.5, -1069.5, 140.0f, 6.5f);
-		Location loc6 = new Location(w, -977.5, 47.5, -963.5, -180.0f, -16.5f);
-		Location loc7 = new Location(w, -998.5, 47.5, -963.5, 50.0f, 19.5f);
-		Location loc8 = new Location(w, -997.5, 44.5, -1076.5, 160.0f, 7.5f);
-		Location loc9 = new Location(w, -1036.5, 49.5, -1032.5, 20.0f, -1.0f);
-		
+		World w = Bukkit.getWorld("ArcadeCarrier");
+		Location loc0 = new Location(w, -998.5, 70.5, -943.5, 180f, -4.5f);
+		Location loc1 = new Location(w, -1003.5, 76.5, -937.5, 160f, 2.5f);
+		Location loc2 = new Location(w, -1021.5, 48.5, -963.5, 180f, 0f);
+		Location loc3 = new Location(w, -1025.5, 48.5, -998.5, 160f, 1f);
+		Location loc4 = new Location(w, -959.5, 48.5, -983.5, 130f, 13.5f);
+		Location loc5 = new Location(w, -948.5, 48.5, -951.5, 110f, -5.5f);
+		Location loc6 = new Location(w, -967.5, 45.5, -937.5, 150f, -13.5f);
+		Location loc7 = new Location(w, -989.5, 48.5, -975.5, 60f, 2f);
+		Location loc8 = new Location(w, -1018.5, 49.5, -955.5, 100f, 2.5f);
+		Location loc9 = new Location(w, -1053.5, 46.5, -950.5, 80f, 0f);
 		switch(r) {
 		case 0: p.teleport(loc0); break;
 		case 1: p.teleport(loc1); break;
@@ -110,5 +109,5 @@ public class Arcade2 implements Arcade{
 			e.printStackTrace();
 		}
 	}
-	
+
 }
