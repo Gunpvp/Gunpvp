@@ -11,6 +11,9 @@ public class Commands {
 		new ShopCommand();
 		new SpawnCommand();
 		new EnderchestCommand();
+		new DatabaseCommand();
+		new StatsCommand();
+		new MoneyCommand();
 		
 		Console.info("loaded commands!");
 	}

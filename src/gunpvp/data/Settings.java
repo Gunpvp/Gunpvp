@@ -1,5 +1,7 @@
 package gunpvp.data;
 
+import org.bukkit.entity.Player;
+
 import gunpvp.util.Database;
 
 public class Settings {
@@ -39,6 +41,12 @@ public class Settings {
 	public void flipInfo() {
 		info = !info;
 		Database.execute("UPDATE GUNPVP_SETTINGS SET `INFO`= '"+info+"'");
+	}
+	
+	public void showSettings(Player p) {
+		p.sendMessage("§7Autorespawn§8: "+(auto?"§a§lEIN":"§c§lAUS"));
+		p.sendMessage("§7Chat§8: "+(chat?"§a§lEIN":"§c§lAUS"));
+		p.sendMessage("§7Infotexte§8: "+(info?"§a§lEIN":"§c§lAUS"));
 	}
 	
 }

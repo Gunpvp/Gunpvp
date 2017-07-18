@@ -1,8 +1,10 @@
 package gunpvp.enderchest;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -17,6 +19,29 @@ public class StorageChest {
 	
 	public StorageChest(Player p) {
 		this.p = p;
+		try {
+			Gunpvp.getPlugin().getConfig().load("plugins/Gunpvp/weaponbobes/"+p.getName()+".yml");
+		} catch (FileNotFoundException e) {
+			try {
+				Gunpvp.getPlugin().getConfig().save("plugins/Gunpvp/weaponbobes/"+p.getName()+".yml");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			Bukkit.getConsoleSender().sendMessage("§8[§2Gunpvp§8] §aNew config file for player " + p.getName() + " has been created!");
+			try {
+				Gunpvp.getPlugin().getConfig().load("plugins/Gunpvp/weaponbobes/"+p.getName()+".yml");
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (InvalidConfigurationException e1) {
+				e1.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidConfigurationException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void storeInventory(Inventory inventory) {
@@ -26,7 +51,7 @@ public class StorageChest {
 		}
 		
 		try {
-			Gunpvp.getPlugin().getConfig().save("enderchest.txt");
+			Gunpvp.getPlugin().getConfig().save("plugins/Gunpvp/weaponbobes/"+p.getName()+".yml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

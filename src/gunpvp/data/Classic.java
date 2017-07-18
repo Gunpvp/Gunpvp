@@ -52,4 +52,13 @@ public class Classic {
 		DataManager.add(player);
 	}
 	
+	public void showClassic(Player p) {
+		p.sendMessage("§7Gunner§8: "+(gunner>0?"§a§lGEKAUFT":"§c§lGESPERRT"));
+		p.sendMessage("§7Rambo§8: "+(rambo>0?"§a§lGEKAUFT":"§c§lGESPERRT"));
+		p.sendMessage("§7Pyro§8: "+(pyro>0?"§a§lGEKAUFT":"§c§lGESPERRT"));
+		p.sendMessage("§7Jugger§8: "+(jugger>0?"§a§lGEKAUFT":"§c§lGESPERRT"));
+		p.sendMessage("§7Healer§8: "+(healer>0?"§a§lGEKAUFT":"§c§lGESPERRT"));
+		p.sendMessage("§7Bomber§8: "+(bomber>0?"§a§lGEKAUFT":"§c§lGESPERRT"));
+	}
+	
 }

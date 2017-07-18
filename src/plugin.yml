@@ -1,6 +1,6 @@
 name: Gunpvp
-author: Bernhard Scharrer
-version: 1.0
+author: Bernhard Scharrer, Thomas Langs
+version: 2.1
 main: gunpvp.Gunpvp
 
 commands:
@@ -19,3 +19,10 @@ commands:
   enderchest:
     description:
     aliases: [ec]
+  database:
+    description:
+    aliases: [db]
+  stats:
+    description:
+  money:
+    aliases: [m,cash]

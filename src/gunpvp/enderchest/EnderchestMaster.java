@@ -1,9 +1,7 @@
 package gunpvp.enderchest;
 
-import java.io.IOException;
 import java.util.Vector;
 
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +11,6 @@ import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import gunpvp.Gunpvp;
 import gunpvp.listener.Listener;
 
 public class EnderchestMaster extends Listener {
@@ -22,11 +19,6 @@ public class EnderchestMaster extends Listener {
 	
 	public EnderchestMaster() {
 		super();
-		try {
-			Gunpvp.getPlugin().getConfig().load("enderchest.txt");
-		} catch (IOException | InvalidConfigurationException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	@EventHandler
