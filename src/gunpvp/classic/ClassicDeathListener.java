@@ -126,8 +126,8 @@ public class ClassicDeathListener extends Listener {
 			 */
 			ClassicKillstreak.addKill(k);
 			Stats stats_killer = DataManager.getData(k).getStats();
-			stats.addKill();
-			stats.editMoney(KILL_REWARD);
+			stats_killer.addKill();
+			stats_killer.editMoney(KILL_REWARD);
 			k.sendMessage("§aKillbonus §2>>> §b"+KILL_REWARD+" Guncoins erhalten");
 			ClassicKillBonus.givePlayerKillBonus(k);
 			

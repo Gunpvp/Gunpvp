@@ -146,7 +146,7 @@ public class ArcadeDeathListener extends Listener {
 			 * increment killstreak
 			 * add kill to killer
 			 * add kill reward to killer money
-			 * inform killer 
+			 * inform killer
 			 */
 			ArcadeKillstreak.addKill(k);
 			Stats stats_killer = DataManager.getData(k).getStats();
