@@ -25,10 +25,10 @@ public class EntityDamageListener extends Listener {
 		if (e.getEntity() instanceof Player) {
 			if (e.getDamager() instanceof Player) {
 				Player d = (Player) e.getDamager();
-				if (d.getItemInHand() != null) {
-					if (!(d.getItemInHand().getType() == Material.WOOD_SWORD
-							|| d.getItemInHand().getType() == Material.IRON_SWORD
-							|| d.getItemInHand().getType() == Material.DIAMOND_SWORD)) {
+				if (d.getInventory().getItemInMainHand() != null) {
+					if (!(d.getInventory().getItemInMainHand().getType() == Material.WOOD_SWORD
+							|| d.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD
+							|| d.getInventory().getItemInMainHand().getType() == Material.DIAMOND_SWORD)) {
 						e.setDamage(0.0);
 					}
 				}

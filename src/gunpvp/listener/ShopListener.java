@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.shampaggon.crackshot.CSUtility;
 
-import de.ShortByte.sbTitleAPI.sbTitleAPI;
+import gunpvp.Titles;
 import gunpvp.data.DataManager;
 import gunpvp.data.Stats;
 import gunpvp.scoreboard.GunpvpScoreboard;
@@ -90,9 +90,8 @@ public class ShopListener extends Listener {
 		Stats stats = DataManager.getData(p).getStats();
 		if (stats.getMoney() >= prize) {
 			stats.editMoney(-prize);
-			sbTitleAPI.reset(p);
-			sbTitleAPI.sendTitle(p, "§2" + weaponname + " §aerhalten!");
-			sbTitleAPI.sendSubTitle(p, "§7Kontostand: §a$" + stats.getMoney());
+			Titles.clear(p);
+			Titles.sendTitle(p, "§2" + weaponname + " §aerhalten!", "§7Kontostand: §a$" + stats.getMoney());
 			csu.giveWeapon(p, weaponname, 1);
 			p.updateInventory();
 			GunpvpScoreboard.drawScoreBoard(p);
@@ -103,9 +102,8 @@ public class ShopListener extends Listener {
 		Stats stats = DataManager.getData(p).getStats();
 		if (stats.getMoney() >= prize) {
 			stats.editMoney(-prize);
-			sbTitleAPI.reset(p);
-			sbTitleAPI.sendTitle(p, "§2" + type + "-Armor §aerhalten!");
-			sbTitleAPI.sendSubTitle(p, "§7Kontostand: §a$" + stats.getMoney());
+			Titles.clear(p);
+			Titles.sendTitle(p, "§2" + type + "-Armor §aerhalten!", "§7Kontostand: §a$" + stats.getMoney());
 			
 			switch (type) {
 			case "Lvl-1":
@@ -152,9 +150,8 @@ public class ShopListener extends Listener {
 		Stats stats = DataManager.getData(p).getStats();
 		if (stats.getMoney() >= prize) {
 			stats.editMoney(-prize);
-			sbTitleAPI.reset(p);
-			sbTitleAPI.sendTitle(p, "§2" + amount + "x" + itemname + " §aerhalten!");
-			sbTitleAPI.sendSubTitle(p, "§7Kontostand: §a$" + stats.getMoney());
+			Titles.clear(p);
+			Titles.sendTitle(p, "§2" + amount + "x" + itemname + " §aerhalten!", "§7Kontostand: §a$" + stats.getMoney());
 			ItemStack item = new ItemStack(type, amount, (byte) 0);
 			ItemMeta meta = item.getItemMeta();
 			meta.setDisplayName(itemname);
@@ -171,9 +168,8 @@ public class ShopListener extends Listener {
 	}
 	
 	private static void goOutOfMoney(Player p,int toless) {
-		sbTitleAPI.reset(p);
-		sbTitleAPI.sendTitle(p, "§4Zu wenig Geld");
-		sbTitleAPI.sendSubTitle(p, "§cDu hast um §4" + toless + "§c zu wenig.");
+		Titles.clear(p);
+		Titles.sendTitle(p, "§4Zu wenig Geld", "§cDu hast um §4" + toless + "§c zu wenig.");
 	}
 	
 }

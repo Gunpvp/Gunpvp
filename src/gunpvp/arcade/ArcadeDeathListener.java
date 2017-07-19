@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
-import de.ShortByte.sbTitleAPI.sbTitleAPI;
+import gunpvp.Titles;
 import gunpvp.data.DataManager;
 import gunpvp.data.Settings;
 import gunpvp.data.Stats;
@@ -115,7 +115,7 @@ public class ArcadeDeathListener extends Listener {
 								arcade.teleport(p);
 								arcade.equip(p);
 								arcade.deleteObject();
-								sbTitleAPI.clear(p);
+								Titles.clear(p);
 								p.setGameMode(GameMode.SURVIVAL);
 							}
 						}
@@ -130,8 +130,12 @@ public class ArcadeDeathListener extends Listener {
 		 */
 		else {
 			
-			Lobby.reset(p);
-			Lobby.giveItems(p);
+			Timer.sync(new Action() {
+				public void perform() {
+					Lobby.reset(p);
+					Lobby.giveItems(p);
+				}
+			}, 0.05f);
 			
 			stats.showStats(p);
 			

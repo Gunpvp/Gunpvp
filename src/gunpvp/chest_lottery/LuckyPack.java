@@ -28,7 +28,7 @@ public class LuckyPack extends Listener{
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (p.getItemInHand() != null&&p.getItemInHand().getType()==Material.TRAPPED_CHEST) {
+            if (p.getInventory().getItemInMainHand() != null&&p.getInventory().getItemInMainHand().getType()==Material.TRAPPED_CHEST) {
                 openPackView(p);
             }
         }
@@ -36,7 +36,7 @@ public class LuckyPack extends Listener{
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getCurrentItem().getType()==Material.CHEST){
+        if(e.getCurrentItem() != null && e.getCurrentItem().getType()==Material.CHEST){
             e.setCancelled(true);
             String displayName=e.getCurrentItem().getItemMeta().getDisplayName();
             buy(displayName,e);

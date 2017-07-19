@@ -21,7 +21,7 @@ public class ItemCommand extends Command {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (player.isOp()) {
-					ItemStack item = player.getItemInHand();
+					ItemStack item = player.getInventory().getItemInMainHand();
 					if (item != null) {
 						if (args.length >= 2) {
 							ItemMeta meta = item.getItemMeta();

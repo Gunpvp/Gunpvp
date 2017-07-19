@@ -8,8 +8,6 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import gunpvp.Gunpvp;
-
 public class StorageChest {
 	
 	public static final String NAME = "§2§lWaffenbox";
@@ -20,16 +18,16 @@ public class StorageChest {
 	public StorageChest(Player p) {
 		this.p = p;
 		try {
-			Gunpvp.getPlugin().getConfig().load("plugins/Gunpvp/weaponbobes/"+p.getName()+".yml");
+			EnderchestMaster.getConfig().load("plugins/Gunpvp/enderchests.yml");
 		} catch (FileNotFoundException e) {
 			try {
-				Gunpvp.getPlugin().getConfig().save("plugins/Gunpvp/weaponbobes/"+p.getName()+".yml");
+				EnderchestMaster.getConfig().save("plugins/Gunpvp/enderchests.yml");
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 			Bukkit.getConsoleSender().sendMessage("§8[§2Gunpvp§8] §aNew config file for player " + p.getName() + " has been created!");
 			try {
-				Gunpvp.getPlugin().getConfig().load("plugins/Gunpvp/weaponbobes/"+p.getName()+".yml");
+				EnderchestMaster.getConfig().load("plugins/Gunpvp/enderchests.yml");
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
@@ -47,11 +45,11 @@ public class StorageChest {
 	public void storeInventory(Inventory inventory) {
 		
 		for (int n = 0;n<inventory.getSize();n++) {
-			Gunpvp.getPlugin().getConfig().set(p.getName()+"."+n, inventory.getItem(n));
+			EnderchestMaster.getConfig().set(p.getName()+"."+n, inventory.getItem(n));
 		}
 		
 		try {
-			Gunpvp.getPlugin().getConfig().save("plugins/Gunpvp/weaponbobes/"+p.getName()+".yml");
+			EnderchestMaster.getConfig().save("plugins/Gunpvp/enderchests.yml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,7 +61,7 @@ public class StorageChest {
 		Inventory inv = Bukkit.createInventory(null, SIZE, NAME);
 		
 		for (int n = 0;n < SIZE;n++) {
-			inv.setItem(n, Gunpvp.getPlugin().getConfig().getItemStack(p.getName()+"."+n));
+			inv.setItem(n, EnderchestMaster.getConfig().getItemStack(p.getName()+"."+n));
 		}
 		
 		return inv;

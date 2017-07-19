@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.shampaggon.crackshot.CSUtility;
 
-import de.ShortByte.sbTitleAPI.sbTitleAPI;
+import gunpvp.Titles;
 
 public class ArcadeGrind implements Arcade {
 	
@@ -43,7 +43,7 @@ public class ArcadeGrind implements Arcade {
 		ammo.setItemMeta(meta);
 		p.getInventory().addItem(ammo);
 		p.getInventory().addItem(ammo);
-		sbTitleAPI.sendActionBar(p, "§e§lStandard-Equip erhalten!");
+		Titles.sendBar(p, "§e§lStandard-Equip erhalten!");
 		p.getInventory().setItem(7, null);
 		p.getInventory().setItem(8, null);
 		ItemStack item1 = new ItemStack(Material.IRON_INGOT, 1, (byte) 0);

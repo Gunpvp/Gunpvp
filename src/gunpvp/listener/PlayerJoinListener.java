@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import gunpvp.data.DataManager;
+import gunpvp.inventories.Inventories;
 import gunpvp.scoreboard.GunpvpScoreboard;
 import gunpvp.util.Action;
 import gunpvp.util.Console;
@@ -25,6 +26,8 @@ public class PlayerJoinListener extends Listener {
 			public void perform() {
 				
 				DataManager.add(p);
+				
+				Inventories.loadInventory(p);
 				
 				Lobby.reset(p);
 				Lobby.send(p);

@@ -23,26 +23,26 @@ public class Medipack extends Listener {
 		final Player p = e.getPlayer();
 		if (e.getItem() != null) {
 			if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-				if (p.getItemInHand() != null) {
-					if (p.getItemInHand().getType() == Material.APPLE) {
+				if (p.getInventory().getItemInMainHand() != null) {
+					if (p.getInventory().getItemInMainHand().getType() == Material.APPLE) {
 						if (!timeout.contains(p)) {
 							timeout.add(p);
-							if (p.getItemInHand().hasItemMeta()) {
-								if (p.getItemInHand().getItemMeta().getDisplayName().equals("§2§lMedipack")) {
+							if (p.getInventory().getItemInMainHand().hasItemMeta()) {
+								if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals("§2§lMedipack")) {
 									p.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 0));
 									for (PotionEffect pe : p.getActivePotionEffects()) {
 										if (pe.getType() == PotionEffectType.POISON) p.removePotionEffect(pe.getType());
 									}
-									if (p.getItemInHand().getAmount() == 1) {
+									if (p.getInventory().getItemInMainHand().getAmount() == 1) {
 										Bukkit.getScheduler().scheduleSyncDelayedTask(Gunpvp.getPlugin(), new Runnable() {
 											@Override
 											public void run() {
-												p.getInventory().setItemInHand(null);
+												p.getInventory().setItemInMainHand(null);
 												p.updateInventory();
 											}
 										}, 5L);
 									} else {
-										p.getItemInHand().setAmount(p.getItemInHand().getAmount()-1);
+										p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount()-1);
 										p.updateInventory();
 									}
 								}

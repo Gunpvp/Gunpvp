@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -15,7 +16,8 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.shampaggon.crackshot.CSUtility;
 
-import de.ShortByte.sbTitleAPI.sbTitleAPI;
+import gunpvp.Titles;
+import gunpvp.inventories.Inventories;
 
 public class ClassicItems {
 	
@@ -33,6 +35,7 @@ public class ClassicItems {
 		case "Meltdown": cla = new ClassicMetldown(); break;
 		}
 		if (cla != null) {
+			Inventories.saveInventory(p);
 			cla.teleport(p);
 			cla.deleteObject();
 		}
@@ -43,7 +46,7 @@ public class ClassicItems {
 		p.getInventory().setLeggings(null);
 		p.getInventory().setBoots(null);
 		p.setFireTicks(0);
-		p.setHealth(p.getMaxHealth());
+		p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		p.setLevel(0);
 		p.setExp(0);
 		for (PotionEffect pe : p.getActivePotionEffects()) p.removePotionEffect(pe.getType());
@@ -137,8 +140,8 @@ public class ClassicItems {
 			item2.setItemMeta(meta2);
 			p.getInventory().setItem(8, item2);
 			p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 60, 51));
-			sbTitleAPI.clear(p);
-			sbTitleAPI.sendActionBar(p, "§2§l" + type + "-Kit §a§lerhalten");
+			Titles.clear(p);
+			Titles.sendBar(p, "§2§l" + type + "-Kit §a§lerhalten");
 		}
 	}
 	

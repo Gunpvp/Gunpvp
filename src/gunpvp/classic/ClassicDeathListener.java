@@ -9,10 +9,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import de.ShortByte.sbTitleAPI.sbTitleAPI;
+import gunpvp.Titles;
 import gunpvp.data.DataManager;
 import gunpvp.data.Settings;
 import gunpvp.data.Stats;
+import gunpvp.inventories.Inventories;
 import gunpvp.listener.DeathListener;
 import gunpvp.listener.Listener;
 import gunpvp.util.Action;
@@ -91,7 +92,7 @@ public class ClassicDeathListener extends Listener {
 								if (p.getWorld() == Locations.CLASSIC_MELTDOWN) classic = new ClassicMetldown();
 								if (classic != null) {
 									classic.teleport(p);
-									sbTitleAPI.clear(p);
+									Titles.clear(p);
 									p.setGameMode(GameMode.SURVIVAL);
 									ClassicItems.equip(p, ClassicItems.getKitFromClassic(p), p.getWorld().getName());
 									classic.deleteObject();
@@ -108,8 +109,15 @@ public class ClassicDeathListener extends Listener {
 		 */
 		else {
 			
-			Lobby.reset(p);
-			Lobby.giveItems(p);
+			Inventories.loadInventory(p);
+			
+			Timer.sync(new Action() {
+				public void perform() {
+					Lobby.reset(p);
+					Lobby.giveItems(p);
+				}
+			}, 0.05f);
+
 			ClassicItems.removeFromClassic(p);
 			
 			stats.showStats(p);

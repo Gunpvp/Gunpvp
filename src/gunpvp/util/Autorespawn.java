@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import de.ShortByte.sbTitleAPI.sbTitleAPI;
+import gunpvp.Titles;
 
 public class Autorespawn {
 	
@@ -54,9 +54,8 @@ public class Autorespawn {
 				autorespawn.remove(p);
 				autorespawn.put(p.getName(), time_remaining);
 				
-				sbTitleAPI.reset(p);
-				sbTitleAPI.sendTitle(p, "§2§lAutorespawn");
-				sbTitleAPI.sendSubTitle(p, "§7" + time_remaining + "s");
+				Titles.clear(p);
+				Titles.sendTitle(p, "§2§lAutorespawn", "§7" + time_remaining + "s");
 				
 			}
 		}, 1f, 1f);

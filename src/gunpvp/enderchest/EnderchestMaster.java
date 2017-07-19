@@ -1,9 +1,12 @@
 package gunpvp.enderchest;
 
+import java.io.File;
 import java.util.Vector;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,9 +23,11 @@ import gunpvp.listener.Listener;
 public class EnderchestMaster extends Listener {
 	
 	private static Vector<StorageChest> chests = new Vector<>();
+	private static FileConfiguration config;
 	
 	public EnderchestMaster() {
 		super();
+		config = YamlConfiguration.loadConfiguration(new File("plugins/Gunpvp/enderchests.yml"));
 	}
 	
 	@EventHandler
@@ -57,7 +62,7 @@ public class EnderchestMaster extends Listener {
 				
 				e.setCancelled(true);
 				Player p = e.getPlayer();
-				p.playSound(p.getLocation(), Sound.CHEST_OPEN, 1, 1);
+				p.playSound(p.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
 				EnderchestMaster.openEnderchest(p);
 				
 			}
@@ -72,7 +77,7 @@ public class EnderchestMaster extends Listener {
 		
 		if (e.getPlayer() instanceof Player) {
 			Player p = (Player) e.getPlayer();
-			p.playSound(p.getLocation(), Sound.CHEST_CLOSE, 1, 1);
+			p.playSound(p.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1, 1);
 		}
 		StorageChest chest = getChest(e.getPlayer());
 		chest.storeInventory(e.getInventory());
@@ -99,6 +104,10 @@ public class EnderchestMaster extends Listener {
 		p.openInventory(getChest(p).generateInventory());
 		p.updateInventory();
 		
+	}
+	
+	public static FileConfiguration getConfig() {
+		return config;
 	}
 	
 }

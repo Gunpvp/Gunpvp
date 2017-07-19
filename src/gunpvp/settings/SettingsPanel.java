@@ -20,11 +20,11 @@ public class SettingsPanel extends Listener {
 	public void onInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			if (p.getItemInHand() != null) {
-				if (p.getItemInHand().getType() == Material.IRON_INGOT) {
+			if (p.getInventory().getItemInMainHand() != null) {
+				if (p.getInventory().getItemInMainHand().getType() == Material.IRON_INGOT) {
 					openSettingsInv(p);
 				}
-				if (p.getItemInHand().getType() == Material.BED) {
+				if (p.getInventory().getItemInMainHand().getType() == Material.BED) {
 					Bukkit.dispatchCommand(p, "s");
 				}
 			}

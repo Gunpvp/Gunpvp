@@ -2,10 +2,12 @@ package gunpvp.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import gunpvp.inventories.Inventories;
 import gunpvp.util.Lobby;
 
 public class SpawnCommand extends Command {
@@ -29,7 +31,7 @@ public class SpawnCommand extends Command {
 					if (p.getWorld()!=Bukkit.getWorld("Gunpvp")) {
 						if (p.getWorld() != Bukkit.getWorld("ZombieForest")) {
 							
-							if (p.getHealth() > p.getMaxHealth() * (3f/4f)) {
+							if (p.getHealth() > p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() * (3f/4f)) {
 								
 								for (Entity en : p.getNearbyEntities(25, 25, 25)) {
 									if (en instanceof Player) {
@@ -40,6 +42,7 @@ public class SpawnCommand extends Command {
 										}
 									}
 								}
+								if (p.getWorld().getName().startsWith("Classic")) Inventories.loadInventory(p);
 								Lobby.reset(p);
 								Lobby.giveItems(p);
 								p.sendMessage("§8[§2Gunpvp§8] §aDu wurdest zum Spawn teleportiert!");

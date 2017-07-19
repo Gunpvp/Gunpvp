@@ -5,6 +5,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import gunpvp.classic.ClassicItems;
 import gunpvp.data.DataManager;
+import gunpvp.inventories.Inventories;
 
 public class PlayerQuitListener extends Listener {
 
@@ -13,6 +14,7 @@ public class PlayerQuitListener extends Listener {
 		e.setQuitMessage("§c<< §7" + e.getPlayer().getName());
 		DataManager.remove(e.getPlayer());
 		ClassicItems.removeFromClassic(e.getPlayer());
+		Inventories.saveInventory(e.getPlayer());
 	}
 	
 }

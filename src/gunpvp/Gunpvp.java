@@ -9,6 +9,7 @@ import gunpvp.arcade.ArcadeSignUpdater;
 import gunpvp.classic.ClassicKillstreak;
 import gunpvp.classic.ClassicSignUpdater;
 import gunpvp.commands.Commands;
+import gunpvp.inventories.Inventories;
 import gunpvp.listener.Listeners;
 import gunpvp.scoreboard.GunpvpScoreboard;
 import gunpvp.util.Action;
@@ -35,6 +36,7 @@ public class Gunpvp extends JavaPlugin {
 		Listeners.init();
 		Commands.init();
 		Locations.init();
+		Inventories.init();
 		
 		Timer.repeat(new Action() {
 			public void perform() {

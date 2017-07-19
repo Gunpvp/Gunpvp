@@ -3,13 +3,13 @@ package gunpvp.listener;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntityDamageEvent.DamageModifier;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -90,11 +90,11 @@ public class DeathListener extends Listener {
 	}
 
 	private boolean calculateDamage(EntityDamageEvent e, Player p) {
-		if (e.getDamage(DamageModifier.ARMOR) >= p.getHealth()) {
+		if (e.getFinalDamage() >= p.getHealth()) {
 			
 			e.setDamage(0);
 			e.setCancelled(true);
-			p.setHealth(p.getMaxHealth());
+			p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 			
 			return true;
 			
@@ -106,7 +106,7 @@ public class DeathListener extends Listener {
 	public void damagePlayer(double damage, Player p) {
 		if (damage >= p.getHealth()) {
 			
-			p.setHealth(p.getMaxHealth());
+			p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 			
 			executeVirtualDeath(p, null);
 			
@@ -129,7 +129,7 @@ public class DeathListener extends Listener {
 			
 			e.setDamage(0);
 			e.setCancelled(true);
-			p.setHealth(p.getMaxHealth());
+			p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 			
 			return true;
 			
@@ -142,13 +142,13 @@ public class DeathListener extends Listener {
 		
 		if (p==k) k = null;
 		
-		p.playSound(p.getLocation(), Sound.IRONGOLEM_DEATH, 1, 1);
+		p.playSound(p.getLocation(), Sound.ENTITY_IRONGOLEM_DEATH, 1, 1);
 		p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 20));
 		p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20, 20));
 		p.getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 100);
 		
 		if (k!= null) {
-			k.playSound(k.getLocation(), Sound.LEVEL_UP, 1, 1);
+			k.playSound(k.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 		}
 		
 		Player killer = k;

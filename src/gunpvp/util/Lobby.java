@@ -3,6 +3,7 @@ package gunpvp.util;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import gunpvp.Titles;
@@ -11,8 +12,7 @@ public class Lobby {
 	
 	public static void send(Player p) {
 		
-		Titles.sendTitle(p, "§2Gunpvp");
-		Titles.sendSubTitle(p, "§7Willkommen §a" + p.getName());
+		Titles.sendTitle(p, "§2Gunpvp", "§7Willkommen §a" + p.getName());
 		for (int n = 0; n<100; n++) p.sendMessage("§a");
 		p.sendMessage("§8§l\\______[§2§l===§8§l|§2§l===§8§l]______/");
 		p.sendMessage("");
@@ -20,7 +20,7 @@ public class Lobby {
 		p.sendMessage("");
 		p.sendMessage("§8§l\\______[§2§l===§8§l|§2§l===§8§l]______/");
 		Titles.sendBar(p, "§a");
-		p.playSound(p.getLocation(), Sound.LEVEL_UP, 3, 1);
+		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 3, 1);
 		if (p.isOp()) p.setPlayerListName("§c" + p.getName());
 		else p.setPlayerListName("§a" + p.getName());
 		
@@ -30,8 +30,9 @@ public class Lobby {
 		
 		p.teleport(Locations.LOBBY);
 		p.setFireTicks(0);
-		p.setHealth(p.getMaxHealth());
+		p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		p.setLevel(0);
+		
 		p.setExp(0);
 		p.setCompassTarget(Locations.LOBBY);
 		p.getInventory().setHeldItemSlot(4);
