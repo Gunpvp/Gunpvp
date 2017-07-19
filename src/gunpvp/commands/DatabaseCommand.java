@@ -81,7 +81,7 @@ public class DatabaseCommand extends Command {
 				
 			}
 		} else {
-			sender.sendMessage("§8[§2Gunpvp§8] §cKeine Rechte um Datenbank zu manipulieren!");
+			sender.sendMessage("§8[§2Gunpvp§8] §cCommand nicht gefunden!");
 		}
 		
 		return false;

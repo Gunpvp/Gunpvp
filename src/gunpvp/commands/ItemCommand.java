@@ -25,9 +25,9 @@ public class ItemCommand extends Command {
 					if (item != null) {
 						if (args.length >= 2) {
 							ItemMeta meta = item.getItemMeta();
-							meta.setDisplayName(args[0]);
+							meta.setDisplayName(args[0].replace("&", "§"));
 							List<String> lore = new ArrayList<>();
-							for (int i = 1;i<args.length;i++) lore.add(args[i]);
+							for (int i = 1;i<args.length;i++) lore.add(args[i].replace("&", "§"));
 							meta.setLore(lore);
 							item.setItemMeta(meta);
 						} else {
@@ -37,7 +37,7 @@ public class ItemCommand extends Command {
 						player.sendMessage("§8[§2Gunpvp§8] §cDu musst ein Item in derHand haben!");
 					}
 				} else {
-					player.sendMessage("§8[§2Gunpvp§8] §cDieser Befehl benötigt Adminstratorrechte!");
+					sender.sendMessage("§8[§2Gunpvp§8] §cCommand nicht gefunden!");
 				}
 			}
 		}

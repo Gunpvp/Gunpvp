@@ -15,6 +15,7 @@ public class Commands {
 		new StatsCommand();
 		new MoneyCommand();
 		new ItemCommand();
+		new SQLCommand();
 		
 		Console.info("loaded commands!");
 	}

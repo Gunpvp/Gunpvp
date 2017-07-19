@@ -126,6 +126,15 @@ public class Database {
 	
 	/**
 	 * 
+	 * get connection
+	 * 
+	 */
+	public static Connection getConnection() {
+		return con;
+	}
+	
+	/**
+	 * 
 	 * closes connection
 	 * 
 	 */
