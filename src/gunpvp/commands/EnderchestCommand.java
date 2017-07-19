@@ -19,7 +19,11 @@ public class EnderchestCommand extends Command {
 				
 				Player p = (Player) sender;
 				
-				EnderchestMaster.openEnderchest(p);
+				if (p.isOp()) {
+					EnderchestMaster.openEnderchest(p);
+				} else {
+					p.sendMessage("§8[§2Gunpvp§8] §cDieser Befehl benötigt Adminstratorrechte!");
+				}
 				
 			}
 		}

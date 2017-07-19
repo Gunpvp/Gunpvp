@@ -26,3 +26,5 @@ commands:
     description:
   money:
     aliases: [m,cash]
+  item:
+    description:
