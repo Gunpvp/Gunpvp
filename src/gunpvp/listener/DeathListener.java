@@ -72,7 +72,7 @@ public class DeathListener extends Listener {
 		
 	}
 	
-	@EventHandler
+	@EventHandler (priority=EventPriority.HIGHEST)
 	public void onShoot(WeaponDamageEntityEvent e) {
 
 		if (e.getPlayer().getWorld().getName().equals(Locations.GUNPVP.getName())) {
