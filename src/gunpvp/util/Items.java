@@ -13,6 +13,10 @@ public class Items {
 	private static ItemMeta meta;
 	private static List<String> lore;
 
+	public static ItemStack generate(String name, Material type, int amount, String... description){
+	    return generate(name,type,amount,0,description);
+    }
+
 	public static ItemStack generate(String name, Material type, int amount, int data, String... description) {
 		stack = new ItemStack(type, amount, (byte) data);
 		meta = stack.getItemMeta();
