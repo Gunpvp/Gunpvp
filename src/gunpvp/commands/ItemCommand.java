@@ -25,9 +25,9 @@ public class ItemCommand extends Command {
 					if (item != null) {
 						if (args.length >= 2) {
 							ItemMeta meta = item.getItemMeta();
-							meta.setDisplayName(args[0].replace("&", "§"));
+							meta.setDisplayName(args[0].replace("&", "§").replace("_", " "));
 							List<String> lore = new ArrayList<>();
-							for (int i = 1;i<args.length;i++) lore.add(args[i].replace("&", "§"));
+							for (int i = 1;i<args.length;i++) lore.add(args[i].replace("&", "§").replace("_", " "));
 							meta.setLore(lore);
 							item.setItemMeta(meta);
 						} else {
