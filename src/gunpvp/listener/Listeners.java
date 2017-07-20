@@ -25,6 +25,8 @@ public class Listeners {
 		new PlayerItemDamageListener();
 		new WeatherChangeListener();
 		new ChatListener();
+		new LeaveDecayListener();
+		new PlayerChangeHandListener();
 		new SignChangeListener();
 		new WeaponShootListener();
 		
