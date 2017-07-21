@@ -50,6 +50,13 @@ public class Gunpvp extends JavaPlugin {
 		
 	}
 	
+	@Override
+	public void onDisable() {
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			if (!p.getWorld().getName().startsWith("Classic")) Inventories.saveInventory(p);
+		}
+	}
+	
 	public static Gunpvp getPlugin() {
 		return plugin;
 	}

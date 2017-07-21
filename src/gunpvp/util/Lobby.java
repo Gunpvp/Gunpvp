@@ -7,6 +7,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import gunpvp.Titles;
+import gunpvp.classic.ClassicItems;
 
 public class Lobby {
 	
@@ -32,6 +33,8 @@ public class Lobby {
 		p.setFireTicks(0);
 		p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
 		p.setLevel(0);
+		
+		ClassicItems.removeFromClassic(p);
 		
 		p.setExp(0);
 		p.setCompassTarget(Locations.LOBBY);

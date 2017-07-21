@@ -29,7 +29,8 @@ public class Listeners {
 		new PlayerChangeHandListener();
 		new SignChangeListener();
 		new WeaponShootListener();
-		
+		new ExplosionPrimeListener();
+		new ProjectileHitListener();
 		new ArcadeDeathListener();
 		new ArcadeClickListener();
 		

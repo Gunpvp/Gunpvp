@@ -32,7 +32,7 @@ public class DeathListener extends Listener {
 	}
 	
 	
-	@EventHandler (priority=EventPriority.HIGHEST)
+	@EventHandler (priority=EventPriority.LOWEST)
 	public void onDamage(EntityDamageEvent e) {
 		
 		if (e.getCause() == DamageCause.FALL) {
@@ -72,7 +72,7 @@ public class DeathListener extends Listener {
 		
 	}
 	
-	@EventHandler (priority=EventPriority.HIGHEST)
+	@EventHandler (priority=EventPriority.LOWEST)
 	public void onShoot(WeaponDamageEntityEvent e) {
 
 		if (e.getPlayer().getWorld().getName().equals(Locations.GUNPVP.getName())) {

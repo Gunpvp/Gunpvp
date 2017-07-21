@@ -19,6 +19,7 @@ import gunpvp.Titles;
 import gunpvp.data.DataManager;
 import gunpvp.data.Stats;
 import gunpvp.scoreboard.GunpvpScoreboard;
+import gunpvp.util.ArmorManager;
 
 public class ShopListener extends Listener {
 	
@@ -33,7 +34,7 @@ public class ShopListener extends Listener {
 			if (p.getWorld() == Bukkit.getWorld("Gunpvp")) {
 				if (e.getRightClicked() instanceof ItemFrame) {
 					ItemFrame itemframe = (ItemFrame) e.getRightClicked();
-					if (itemframe.getItem().getItemMeta() != null) {
+					if (itemframe.getItem() != null && itemframe.getItem().getItemMeta() != null) {
 						if (p.getGameMode() != GameMode.CREATIVE) e.setCancelled(true);
 							if (itemframe.getItem().hasItemMeta()) {
 								switch (itemframe.getItem().getItemMeta().getDisplayName().replace('§', '&')) {
@@ -104,46 +105,11 @@ public class ShopListener extends Listener {
 			stats.editMoney(-prize);
 			Titles.clear(p);
 			Titles.sendTitle(p, "§2" + type + "-Armor §aerhalten!", "§7Kontostand: §a$" + stats.getMoney());
-			
-			switch (type) {
-			case "Lvl-1":
-				p.getInventory().addItem(getItem(Material.LEATHER_BOOTS, 1, 0, "§2§lLvl-1-Armor", null));
-				p.getInventory().addItem(getItem(Material.LEATHER_LEGGINGS, 1, 0, "§2§lLvl-1-Armor", null));
-				p.getInventory().addItem(getItem(Material.LEATHER_CHESTPLATE, 1, 0, "§2§lLvl-1-Armor", null));
-				p.getInventory().addItem(getItem(Material.LEATHER_HELMET, 1, 0, "§2§lLvl-1-Armor", null));
-				break;
-			case "Lvl-2":
-				p.getInventory().addItem(getItem(Material.GOLD_BOOTS, 1, 0, "§2§lLvl-2-Armor", null));
-				p.getInventory().addItem(getItem(Material.GOLD_LEGGINGS, 1, 0, "§2§lLvl-2-Armor", null));
-				p.getInventory().addItem(getItem(Material.GOLD_CHESTPLATE, 1, 0, "§2§lLvl-2-Armor", null));
-				p.getInventory().addItem(getItem(Material.GOLD_HELMET, 1, 0, "§2§lLvl-2-Armor", null));
-				break;
-			case "Lvl-3":
-				p.getInventory().addItem(getItem(Material.IRON_BOOTS, 1, 0, "§2§lLvl-3-Armor", null));
-				p.getInventory().addItem(getItem(Material.IRON_LEGGINGS, 1, 0, "§2§lLvl-3-Armor", null));
-				p.getInventory().addItem(getItem(Material.IRON_CHESTPLATE, 1, 0, "§2§lLvl-3-Armor", null));
-				p.getInventory().addItem(getItem(Material.IRON_HELMET, 1, 0, "§2§lLvl-3-Armor", null));
-				break;
-			case "Lvl-4":
-				p.getInventory().addItem(getItem(Material.DIAMOND_BOOTS, 1, 0, "§2§lLvl-4-Armor", null));
-				p.getInventory().addItem(getItem(Material.DIAMOND_LEGGINGS, 1, 0, "§2§lLvl-4-Armor", null));
-				p.getInventory().addItem(getItem(Material.DIAMOND_CHESTPLATE, 1, 0, "§2§lLvl-4-Armor", null));
-				p.getInventory().addItem(getItem(Material.DIAMOND_HELMET, 1, 0, "§2§lLvl-4-Armor", null));
-				break;
-			}
+			ArmorManager.giveArmor(p, Integer.parseInt(type.substring(type.length()-1, type.length())));
 			
 			p.updateInventory();
 			GunpvpScoreboard.drawScoreBoard(p);
 		} else goOutOfMoney(p, prize-stats.getMoney());
-	}
-	
-	private static ItemStack getItem(Material mat, int amount, int data, String name, ArrayList<String> lore) {
-		ItemStack item = new ItemStack(mat, amount, (short) data);
-		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(name);
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		return item;
 	}
 	
 	private void buyItem(final Player p, String itemname, ArrayList<String> lore, int amount, Material type, int prize) {
