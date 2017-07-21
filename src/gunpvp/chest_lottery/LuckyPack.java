@@ -54,8 +54,8 @@ public class LuckyPack extends Listener{
      */
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(e.getCurrentItem() != null && (e.getCurrentItem().getType()==Material.CHEST||
-                e.getCurrentItem().getItemMeta().getDisplayName().startsWith(errorPreMessage))){
+        if (e.getCurrentItem() != null && (e.getCurrentItem().getType() == standardMaterial ||
+                e.getCurrentItem().getType() == errorMaterial)) {
             e.setCancelled(true);
             String displayName=e.getCurrentItem().getItemMeta().getDisplayName();
             buy(e);

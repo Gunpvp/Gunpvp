@@ -2,7 +2,6 @@ package gunpvp.enderchest;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.ResultSet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
