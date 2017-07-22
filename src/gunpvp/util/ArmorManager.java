@@ -1,7 +1,6 @@
 package gunpvp.util;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -37,8 +36,27 @@ public class ArmorManager {
 		}
         return armor;
     }
-	
-	public static void damageArmor(PlayerInventory inv) {
+
+    /**
+     * @param armorType
+     * @return
+     */
+    public static ItemStack[] getArmorItemStackArrByMaterial(String armorType) {
+        int level = 1;
+        String armorString = armorType.toString().toUpperCase();
+        if (armorString.contains("LEATHER")) {
+            level = 1;
+        } else if (armorString.contains("GOLD")) {
+            level = 2;
+        } else if (armorString.contains("IRON")) {
+            level = 3;
+        } else if (armorString.contains("DIAMOND")) {
+            level = 4;
+        }
+        return getArmorItemStackArr(level);
+    }
+
+    public static void damageArmor(PlayerInventory inv) {
 		for (ItemStack item : inv) {
 			if (item != null) {
 				switch (item.getType()) {
@@ -136,5 +154,5 @@ public class ArmorManager {
 		}
 		
 	}
-	
+
 }

@@ -1,8 +1,11 @@
 package gunpvp.listener;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
+import com.shampaggon.crackshot.CSUtility;
+import gunpvp.Titles;
+import gunpvp.data.DataManager;
+import gunpvp.data.Stats;
+import gunpvp.scoreboard.GunpvpScoreboard;
+import gunpvp.util.ArmorManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -13,13 +16,8 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.shampaggon.crackshot.CSUtility;
-
-import gunpvp.Titles;
-import gunpvp.data.DataManager;
-import gunpvp.data.Stats;
-import gunpvp.scoreboard.GunpvpScoreboard;
-import gunpvp.util.ArmorManager;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ShopListener extends Listener {
 	
@@ -109,7 +107,6 @@ public class ShopListener extends Listener {
             armor = ArmorManager.getArmorItemStackArr(Integer.parseInt(type.substring(type.length() - 1, type.length())));
             for (ItemStack stack : armor) {
                 if (stack != null) {
-                    p.sendMessage(stack.getItemMeta().getDisplayName());
                     p.getInventory().addItem(stack);
                 }
             }
