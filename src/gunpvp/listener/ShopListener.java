@@ -101,12 +101,19 @@ public class ShopListener extends Listener {
 	
 	public static void buyArmor(final Player p, String type, int prize) {
 		Stats stats = DataManager.getData(p).getStats();
-		if (stats.getMoney() >= prize) {
+        ItemStack[] armor;
+        if (stats.getMoney() >= prize) {
 			stats.editMoney(-prize);
 			Titles.clear(p);
 			Titles.sendTitle(p, "§2" + type + "-Armor §aerhalten!", "§7Kontostand: §a$" + stats.getMoney());
-			ArmorManager.giveArmor(p, Integer.parseInt(type.substring(type.length()-1, type.length())));
-			
+            armor = ArmorManager.getArmorItemStackArr(Integer.parseInt(type.substring(type.length() - 1, type.length())));
+            for (ItemStack stack : armor) {
+                if (stack != null) {
+                    p.sendMessage(stack.getItemMeta().getDisplayName());
+                    p.getInventory().addItem(stack);
+                }
+            }
+
 			p.updateInventory();
 			GunpvpScoreboard.drawScoreBoard(p);
 		} else goOutOfMoney(p, prize-stats.getMoney());

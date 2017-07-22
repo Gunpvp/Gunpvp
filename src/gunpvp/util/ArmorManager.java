@@ -6,35 +6,37 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 public class ArmorManager {
-	
-	public static void giveArmor(Player p, int level) {
-		switch (level) {
+
+    public static ItemStack[] getArmorItemStackArr(int level) {
+        ItemStack[] armor = new ItemStack[4];
+        switch (level) {
 		case 1:
-			p.getInventory().addItem(Items.generate("§2§lLvl-1-Armor", Material.LEATHER_BOOTS));
-			p.getInventory().addItem(Items.generate("§2§lLvl-1-Armor", Material.LEATHER_LEGGINGS));
-			p.getInventory().addItem(Items.generate("§2§lLvl-1-Armor", Material.LEATHER_CHESTPLATE));
-			p.getInventory().addItem(Items.generate("§2§lLvl-1-Armor", Material.LEATHER_HELMET));
-			break;
+            armor[0] = Items.generate("§2§lLvl-1-Armor", Material.LEATHER_BOOTS);
+            armor[1] = Items.generate("§2§lLvl-1-Armor", Material.LEATHER_LEGGINGS);
+            armor[2] = Items.generate("§2§lLvl-1-Armor", Material.LEATHER_CHESTPLATE);
+            armor[3] = Items.generate("§2§lLvl-1-Armor", Material.LEATHER_HELMET);
+            break;
 		case 2:
-			p.getInventory().addItem(Items.generate("§2§lLvl-2-Armor", Material.GOLD_BOOTS));
-			p.getInventory().addItem(Items.generate("§2§lLvl-2-Armor",Material.GOLD_LEGGINGS));
-			p.getInventory().addItem(Items.generate("§2§lLvl-2-Armor", Material.GOLD_CHESTPLATE));
-			p.getInventory().addItem(Items.generate("§2§lLvl-2-Armor", Material.GOLD_HELMET));
-			break;
+            armor[0] = Items.generate("§2§lLvl-2-Armor", Material.GOLD_BOOTS);
+            armor[1] = Items.generate("§2§lLvl-2-Armor", Material.GOLD_LEGGINGS);
+            armor[2] = Items.generate("§2§lLvl-2-Armor", Material.GOLD_CHESTPLATE);
+            armor[3] = Items.generate("§2§lLvl-2-Armor", Material.GOLD_HELMET);
+            break;
 		case 3:
-			p.getInventory().addItem(Items.generate("§2§lLvl-3-Armor", Material.IRON_BOOTS));
-			p.getInventory().addItem(Items.generate("§2§lLvl-3-Armor", Material.IRON_LEGGINGS));
-			p.getInventory().addItem(Items.generate("§2§lLvl-3-Armor", Material.IRON_CHESTPLATE));
-			p.getInventory().addItem(Items.generate("§2§lLvl-3-Armor", Material.IRON_HELMET));
-			break;
+            armor[0] = Items.generate("§2§lLvl-3-Armor", Material.IRON_BOOTS);
+            armor[1] = Items.generate("§2§lLvl-3-Armor", Material.IRON_LEGGINGS);
+            armor[2] = Items.generate("§2§lLvl-3-Armor", Material.IRON_CHESTPLATE);
+            armor[3] = Items.generate("§2§lLvl-3-Armor", Material.IRON_HELMET);
+            break;
 		case 4:
-			p.getInventory().addItem(Items.generate("§2§lLvl-4-Armor", Material.DIAMOND_BOOTS));
-			p.getInventory().addItem(Items.generate("§2§lLvl-4-Armor", Material.DIAMOND_LEGGINGS));
-			p.getInventory().addItem(Items.generate("§2§lLvl-4-Armor", Material.DIAMOND_CHESTPLATE));
-			p.getInventory().addItem(Items.generate("§2§lLvl-4-Armor", Material.DIAMOND_HELMET));
-			break;
+            armor[0] = Items.generate("§2§lLvl-4-Armor", Material.DIAMOND_BOOTS);
+            armor[1] = Items.generate("§2§lLvl-4-Armor", Material.DIAMOND_LEGGINGS);
+            armor[2] = Items.generate("§2§lLvl-4-Armor", Material.DIAMOND_CHESTPLATE);
+            armor[3] = Items.generate("§2§lLvl-4-Armor", Material.DIAMOND_HELMET);
+            break;
 		}
-	}
+        return armor;
+    }
 	
 	public static void damageArmor(PlayerInventory inv) {
 		for (ItemStack item : inv) {
