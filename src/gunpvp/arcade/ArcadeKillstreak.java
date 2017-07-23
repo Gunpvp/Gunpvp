@@ -1,7 +1,9 @@
 package gunpvp.arcade;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,19 +20,24 @@ import gunpvp.data.Settings;
 
 public class ArcadeKillstreak {
 	
-	private static Hashtable<Player, Integer> streak = new Hashtable<Player, Integer>();
 	private static CSUtility csu = new CSUtility();
+	private static Map<Player, Integer> streak = new HashMap<Player, Integer>();
+	private static List<Player> to_remove = new ArrayList<>();
 	
-	public synchronized static void update() {
+	public static void update() {
 		synchronized (streak) {
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				if (!streak.containsKey(p)) streak.put(p, 0);
 			}
 			for (Player p : streak.keySet()) {
-				if (p.isOnline() == false) {
-					streak.remove(p);
+				if (!p.isOnline()) {
+					to_remove.add(p);
 				}
 			}
+			for (Player p : to_remove) {
+				streak.remove(p);
+			}
+			to_remove.clear();
 		}
 	}
 	
