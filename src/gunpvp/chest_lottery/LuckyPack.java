@@ -33,7 +33,7 @@ public class LuckyPack extends Listener{
 
 
     private static final String errorPreMessage = "§cDu hast kein ";
-    private static final String[] packs = {"Common Weapon Pack", "Throwable Pack", "Armor Pack", "Rare Weapon Pack"};
+    public static final String[] packs = {"Common Weapon Pack", "Throwable Pack", "Armor Pack", "Rare Weapon Pack"};
     private static final Inventory luckyPackView = Bukkit.createInventory(null, 27, "§8Lucky Packs");
     private static final Material standardMaterial= Material.CHEST;
     private static final Material errorMaterial = Material.FIREWORK_CHARGE;

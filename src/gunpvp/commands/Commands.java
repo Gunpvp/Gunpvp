@@ -16,6 +16,7 @@ public class Commands {
 		new MoneyCommand();
 		new ItemCommand();
 		new SQLCommand();
+		new LuckyPackCommand();
 		
 		Console.info("loaded commands!");
 	}

@@ -30,3 +30,6 @@ commands:
     description:
   sql:
     description:
+  luckypacks:
+    description:
+    aliases: [lp,packs]
