@@ -87,9 +87,9 @@ public class ClassicDeathListener extends Listener {
 						Timer.sync(new Action() {
 							public void perform() {
 								Classic classic = null;
-								if (p.getWorld() == Locations.CLASSIC_BAYVIEW) classic = new ClassicBayview();
-								if (p.getWorld() == Locations.CLASSIC_STUDIO) classic = new ClassicStudio();
-								if (p.getWorld() == Locations.CLASSIC_MELTDOWN) classic = new ClassicMetldown();
+								if (p.getWorld().getName().endsWith("Bayview")) classic = new ClassicBayview();
+								if (p.getWorld().getName().endsWith("Studio")) classic = new ClassicStudio();
+								if (p.getWorld().getName().endsWith("Meltdown")) classic = new ClassicMetldown();
 								if (classic != null) {
 									classic.teleport(p);
 									Titles.clear(p);

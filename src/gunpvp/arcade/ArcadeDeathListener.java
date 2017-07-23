@@ -108,9 +108,9 @@ public class ArcadeDeathListener extends Listener {
 					Timer.sync(new Action() {
 						public void perform() {
 							Arcade arcade = null;
-							if (p.getWorld() == Locations.ARCADE_GRIND) arcade = new ArcadeGrind();
-							if (p.getWorld() == Locations.ARCADE_RAID) arcade = new ArcadeRaid();
-							if (p.getWorld() == Locations.ARCADE_CARRIER) arcade = new ArcadeCarrier();
+							if (p.getWorld().getName().endsWith("Grind")) arcade = new ArcadeGrind();
+							if (p.getWorld().getName().endsWith("Raid")) arcade = new ArcadeRaid();
+							if (p.getWorld().getName().endsWith("Carrier")) arcade = new ArcadeCarrier();
 							if (arcade != null) {
 								arcade.teleport(p);
 								arcade.equip(p);

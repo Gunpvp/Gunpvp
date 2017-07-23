@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import gunpvp.arcade.ArcadeKillstreak;
 import gunpvp.arcade.ArcadeSignUpdater;
+import gunpvp.classic.ClassicItems;
 import gunpvp.classic.ClassicKillstreak;
 import gunpvp.classic.ClassicSignUpdater;
 import gunpvp.commands.Commands;
@@ -54,6 +55,7 @@ public class Gunpvp extends JavaPlugin {
 	public void onDisable() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			if (!p.getWorld().getName().startsWith("Classic")) Inventories.saveInventory(p);
+			ClassicItems.removeFromClassic(p);
 		}
 	}
 	
