@@ -159,7 +159,7 @@ public class DeathListener extends Listener {
 				if (p.getWorld().getName().startsWith("Arcade")) ArcadeDeathListener.onDeath(player, killer);
 				if (p.getWorld().getName().startsWith("Classic")) ClassicDeathListener.onDeath(player, killer);
 			}
-		}, 0.1f);
+		}, 0.05f);
 		
 		Timer.sync(new Action() {
 			public void perform() {

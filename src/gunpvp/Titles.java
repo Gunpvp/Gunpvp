@@ -22,6 +22,7 @@ public class Titles {
 	}
 
 	public static void clear(Player p) {
+		p.sendTitle("§a", "§a", 2, 2, 10);
 		p.resetTitle();
 	}
 	
