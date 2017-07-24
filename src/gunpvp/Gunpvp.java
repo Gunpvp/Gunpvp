@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import gunpvp.adventurerush.AdventureRushMaster;
 import gunpvp.arcade.ArcadeKillstreak;
 import gunpvp.arcade.ArcadeSignUpdater;
 import gunpvp.classic.ClassicItems;
@@ -46,6 +47,7 @@ public class Gunpvp extends JavaPlugin {
 				ClassicSignUpdater.update();
 				ClassicKillstreak.update();
 				GunpvpScoreboard.update();
+				AdventureRushMaster.update();
 			}
 		}, 0, 1);
 		

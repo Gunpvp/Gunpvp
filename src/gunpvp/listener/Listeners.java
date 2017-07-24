@@ -1,7 +1,8 @@
 package gunpvp.listener;
 
-import adventurerush.AdventureRushMoveListener;
-import adventurerush.AdventureRushSignListener;
+import gunpvp.adventurerush.AdventureRushBlockMarkListener;
+import gunpvp.adventurerush.AdventureRushMoveListener;
+import gunpvp.adventurerush.AdventureRushSignListener;
 import gunpvp.arcade.ArcadeClickListener;
 import gunpvp.arcade.ArcadeDeathListener;
 import gunpvp.chest_lottery.LuckyPack;
@@ -44,6 +45,7 @@ public class Listeners {
 		
 		new AdventureRushSignListener();
 		new AdventureRushMoveListener();
+		new AdventureRushBlockMarkListener();
 
 		new LuckyPack();
 		

@@ -1,4 +1,4 @@
-package adventurerush;
+package gunpvp.adventurerush;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;

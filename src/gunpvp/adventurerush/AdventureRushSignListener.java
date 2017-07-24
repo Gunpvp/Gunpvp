@@ -1,4 +1,4 @@
-package adventurerush;
+package gunpvp.adventurerush;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -37,6 +37,7 @@ public class AdventureRushSignListener extends Listener {
 							
 							Inventories.saveInventory(p);
 							p.teleport(world_loc);
+							AdventureRushMaster.addARPlayer(p, world);
 							AdventureRushKits.giveKitToPlayer(p, AdventureRushKit.PUNCHER);
 						} else {
 							p.sendMessage("§8[§2Gunpvp§8] §cNoch nicht freigeschaltet!");

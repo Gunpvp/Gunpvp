@@ -1,4 +1,4 @@
-package adventurerush;
+package gunpvp.adventurerush;
 
 public class AdventureRushSignUpdater {
 	
