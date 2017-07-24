@@ -29,7 +29,7 @@ public class Gunpvp extends JavaPlugin {
 	 */
 	public void onEnable() {
 		
-		for (Player p : Bukkit.getOnlinePlayers()) p.kickPlayer("Server wird reloaded!");
+		for (Player p : Bukkit.getOnlinePlayers()) p.kickPlayer("§8[§2Gunpvp§8] §7Server wird reloaded!");
 		
 		plugin = this;
 		

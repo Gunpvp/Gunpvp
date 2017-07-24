@@ -1,6 +1,7 @@
 package gunpvp.listener;
 
 import org.bukkit.Effect;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -161,13 +162,10 @@ public class DeathListener extends Listener {
 			}
 		}, 0.05f);
 		
-		Timer.sync(new Action() {
-			public void perform() {
-				p.setVelocity(new Vector(0, 2, 0));
-				GunpvpScoreboard.drawScoreBoard(player);
-				if (killer != null) GunpvpScoreboard.drawScoreBoard(killer);
-			}
-		}, 0.05f);
+		p.setGameMode(GameMode.SPECTATOR);
+		p.setVelocity(new Vector(0, 2, 0));
+		GunpvpScoreboard.drawScoreBoard(player);
+		if (killer != null) GunpvpScoreboard.drawScoreBoard(killer);
 		
 	}
 	
