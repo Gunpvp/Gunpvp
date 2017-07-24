@@ -2,15 +2,15 @@ package gunpvp.data;
 
 public class AdventureRush {
 	
-	private String world;
+	private int world;
 	private int steps;
 	
-	public AdventureRush(String world, int steps) {
+	public AdventureRush(int world, int steps) {
 		this.world = world;
 		this.steps = steps;
 	}
 
-	public String getWorld() {
+	public int getWorld() {
 		return world;
 	}
 
