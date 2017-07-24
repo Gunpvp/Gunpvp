@@ -42,7 +42,7 @@ public class SpawnCommand extends Command {
 										}
 									}
 								}
-								if (p.getWorld().getName().startsWith("Classic")) Inventories.loadInventory(p);
+								if (p.getWorld().getName().startsWith("Classic") || p.getWorld().getName().equals("AdventureRush")) Inventories.loadInventory(p);
 								Lobby.reset(p);
 								Lobby.giveItems(p);
 								p.sendMessage("§8[§2Gunpvp§8] §aDu wurdest zum Spawn teleportiert!");

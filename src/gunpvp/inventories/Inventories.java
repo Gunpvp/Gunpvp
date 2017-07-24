@@ -22,15 +22,20 @@ public class Inventories {
 	
 	public static void saveInventory(Player p) {
 		
-		for (int n = 0;n < SIZE;n++) {
-			config.set(p.getName()+"."+ n, p.getInventory().getItem(n));
+		if (!p.getWorld().getName().startsWith("Classic")&& !p.getWorld().getName().equals("AdventureRush")) {
+			
+			for (int n = 0;n < SIZE;n++) {
+				config.set(p.getName()+"."+ n, p.getInventory().getItem(n));
+			}
+			
+			try {
+				config.save("plugins/Gunpvp/inventories.yml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
-		try {
-			config.save("plugins/Gunpvp/inventories.yml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public static void loadInventory(Player p) {

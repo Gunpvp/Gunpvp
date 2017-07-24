@@ -18,7 +18,8 @@ public class PlayerDropItemListener extends Listener {
 		}
 		if (p.getWorld() == Bukkit.getWorld("ClassicBayview")
 				|| p.getWorld() == Bukkit.getWorld("ClassicStudio")
-				|| p.getWorld() == Bukkit.getWorld("ClassicMeltdown")) {
+				|| p.getWorld() == Bukkit.getWorld("ClassicMeltdown")
+				|| p.getWorld() == Bukkit.getWorld("AdventureRush")) {
 			e.setCancelled(true);
 		}
 		if (p.getWorld() == Bukkit.getWorld("Gunpvp")) {

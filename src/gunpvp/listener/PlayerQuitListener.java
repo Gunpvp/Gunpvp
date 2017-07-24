@@ -14,7 +14,7 @@ public class PlayerQuitListener extends Listener {
 		e.setQuitMessage("§c<< §7" + e.getPlayer().getName());
 		DataManager.remove(e.getPlayer());
 		ClassicItems.removeFromClassic(e.getPlayer());
-		if (!e.getPlayer().getWorld().getName().startsWith("Classic")) Inventories.saveInventory(e.getPlayer());
+		Inventories.saveInventory(e.getPlayer());
 	}
 	
 }

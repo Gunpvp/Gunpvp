@@ -31,7 +31,8 @@ public class Lobby {
 		
 		p.teleport(Locations.LOBBY);
 		p.setFireTicks(0);
-		p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+		p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
+		p.setHealth(20.0);
 		p.setLevel(0);
 		
 		ClassicItems.removeFromClassic(p);
