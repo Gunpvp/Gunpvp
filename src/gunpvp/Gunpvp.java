@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import gunpvp.adventurerush.AdventureRushMaster;
+import gunpvp.adventurerush.AdventureRushSpawner;
 import gunpvp.arcade.ArcadeKillstreak;
 import gunpvp.arcade.ArcadeSignUpdater;
 import gunpvp.classic.ClassicItems;
@@ -39,6 +40,7 @@ public class Gunpvp extends JavaPlugin {
 		Commands.init();
 		Locations.init();
 		Inventories.init();
+		AdventureRushSpawner.loadSpawnerFile();
 		
 		Timer.repeat(new Action() {
 			public void perform() {

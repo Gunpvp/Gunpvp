@@ -17,6 +17,7 @@ public class Commands {
 		new ItemCommand();
 		new SQLCommand();
 		new LuckyPackCommand();
+		new ARCommand();
 		
 		Console.info("loaded commands!");
 	}

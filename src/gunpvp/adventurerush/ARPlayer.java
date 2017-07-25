@@ -36,7 +36,7 @@ public class ARPlayer {
 	public void spawnCreatures(float percent) {
 		if (percent>=2) {
 			
-			//TODO summon zombie 
+			AdventureRushSpawner.spawnCreatures(player, world, percent);
 			
 		}
 	}

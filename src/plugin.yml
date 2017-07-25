@@ -33,3 +33,5 @@ commands:
   luckypacks:
     description:
     aliases: [lp,packs]
+  ar:
+    description:
