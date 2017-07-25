@@ -39,6 +39,7 @@ public class AdventureRushSignListener extends Listener {
 							p.teleport(world_loc);
 							AdventureRushMaster.addARPlayer(p, world);
 							AdventureRushKits.giveKitToPlayer(p, AdventureRushKit.PUNCHER);
+							
 						} else {
 							p.sendMessage("§8[§2Gunpvp§8] §cNoch nicht freigeschaltet!");
 						}

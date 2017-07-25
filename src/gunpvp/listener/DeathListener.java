@@ -17,11 +17,11 @@ import org.bukkit.util.Vector;
 
 import com.shampaggon.crackshot.events.WeaponDamageEntityEvent;
 
+import gunpvp.adventurerush.AdventureRushDeathListener;
 import gunpvp.arcade.ArcadeDeathListener;
 import gunpvp.classic.ClassicDeathListener;
 import gunpvp.scoreboard.GunpvpScoreboard;
 import gunpvp.util.Action;
-import gunpvp.util.Locations;
 import gunpvp.util.Timer;
 
 public class DeathListener extends Listener {
@@ -43,7 +43,7 @@ public class DeathListener extends Listener {
 		
 		if (e.getCause() == DamageCause.FIRE_TICK || e.getCause() == DamageCause.FIRE) e.setCancelled(true);
 		
-		if (e.getEntity().getWorld().getName().equals(Locations.GUNPVP.getName())) {
+		if (e.getEntity().getWorld().getName().equals("Gunpvp")) {
 			e.setCancelled(true);
 		}
 		
@@ -60,6 +60,10 @@ public class DeathListener extends Listener {
 					Player k = (Player) edbe.getDamager();
 					
 					if (calculateDamage(e, p)) executeVirtualDeath(p, k);
+					
+				} else {
+					
+					if (calculateDamage(e, p)) executeVirtualDeath(p, null);
 					
 				}
 				
@@ -91,6 +95,7 @@ public class DeathListener extends Listener {
 	}
 
 	private boolean calculateDamage(EntityDamageEvent e, Player p) {
+		System.out.println(e.getFinalDamage()+"|"+p.getHealth());
 		if (e.getFinalDamage() >= p.getHealth()) {
 			
 			e.setDamage(0);
@@ -159,6 +164,7 @@ public class DeathListener extends Listener {
 			public void perform() {
 				if (p.getWorld().getName().startsWith("Arcade")) ArcadeDeathListener.onDeath(player, killer);
 				if (p.getWorld().getName().startsWith("Classic")) ClassicDeathListener.onDeath(player, killer);
+				if (p.getWorld().getName().startsWith("AdventureRush")) AdventureRushDeathListener.onDeath(player, killer);
 			}
 		}, 0.05f);
 		

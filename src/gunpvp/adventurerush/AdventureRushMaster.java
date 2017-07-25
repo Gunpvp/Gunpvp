@@ -16,6 +16,12 @@ public class AdventureRushMaster {
 		
 	}
 	
+	public static void removeARPlayer(ARPlayer arp) {
+
+		players.remove(arp);
+		
+	}
+	
 	public static void update() {
 		
 		for (ARPlayer arp : players) {
@@ -35,6 +41,11 @@ public class AdventureRushMaster {
 			
 		}
 		
+	}
+	
+	public static ARPlayer getARP(Player p) {
+		for (ARPlayer arp : players) if (arp.getPlayer().getName().equals(p.getName())) return arp; 
+		return null;
 	}
 	
 }

@@ -1,5 +1,9 @@
 package gunpvp.data;
 
+import org.bukkit.entity.Player;
+
+import gunpvp.util.Database;
+
 public class AdventureRush {
 	
 	private int world;
@@ -16,6 +20,11 @@ public class AdventureRush {
 
 	public int getSteps() {
 		return steps;
+	}
+	
+	public void setSteps(Player p, float percent) {
+		this.steps = (int) (percent * 100);
+		Database.execute("UPDATE `GUNPVP_ADVENTURERUSH` SET `STEPS` = "+(this.steps)+" WHERE `UUID` = '"+p.getUniqueId().toString()+"'");
 	}
 	
 }
