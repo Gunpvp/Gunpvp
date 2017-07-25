@@ -14,7 +14,12 @@ public class AdventureRushMoveListener extends Listener {
 			
 			if (e.getPlayer().getGameMode() == GameMode.SURVIVAL) {
 				
-				
+				if (e.getPlayer().getLocation().getBlockY()<50) {
+					
+					e.getPlayer().getLocation().setY(75);
+					e.getPlayer().damage(100.0);
+					
+				}
 				
 			}
 			

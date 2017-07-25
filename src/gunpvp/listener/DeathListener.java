@@ -95,7 +95,6 @@ public class DeathListener extends Listener {
 	}
 
 	private boolean calculateDamage(EntityDamageEvent e, Player p) {
-		System.out.println(e.getFinalDamage()+"|"+p.getHealth());
 		if (e.getFinalDamage() >= p.getHealth()) {
 			
 			e.setDamage(0);
