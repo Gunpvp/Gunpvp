@@ -15,11 +15,14 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Spider;
 import org.bukkit.entity.Zombie;
 
 public class AdventureRushSpawner {
 	
 	private static List<SpawnLocation> spawn_locs = new ArrayList<>();
+	private static World world = Bukkit.getWorld("AdventureRush");
 	
 	/**
 	 * @param world
@@ -33,7 +36,7 @@ public class AdventureRushSpawner {
 			
 			if (x/2000 == world-1) {
 				
-				if (x > player_x+10 && x <= (player_x+20)) {
+				if (x > player_x+20 && x <= (player_x+30)) {
 					
 					spawnCreature(p, spawn_loc, percent);
 					
@@ -51,9 +54,20 @@ public class AdventureRushSpawner {
 	public static void spawnCreature(Player p, SpawnLocation loc, float percent) {
 		switch (loc.getMob()) {
 		case "ZOMBIE":
-			Zombie zombie = (Zombie) Bukkit.getWorld("AdventureRush").spawnEntity(loc.getLocation(), EntityType.ZOMBIE);
+			Zombie zombie = (Zombie) world.spawnEntity(loc.getLocation(), EntityType.ZOMBIE);
 			zombie.setHealth(3+percent*0.05f);
 			zombie.setTarget(p);
+			zombie.getEquipment().setItemInMainHand(null);
+			break;
+		case "SKELETON":
+			Skeleton skeleton = (Skeleton) world.spawnEntity(loc.getLocation(), EntityType.SKELETON);
+			skeleton.setHealth(3+percent*0.05f);
+			skeleton.setTarget(p);
+			break;
+		case "SPIDER":
+			Spider spider = (Spider) world.spawnEntity(loc.getLocation(), EntityType.SPIDER);
+			spider.setHealth(3+percent*0.05f);
+			spider.setTarget(p);
 			break;
 		}
 	}

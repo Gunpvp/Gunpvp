@@ -3,6 +3,7 @@ package gunpvp.adventurerush;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public class AdventureRushMaster {
@@ -12,6 +13,7 @@ public class AdventureRushMaster {
 	
 	public static void addARPlayer(Player p, int world) {
 		
+		players.remove(getARP(p));
 		players.add(new ARPlayer(p, world));
 		
 	}
@@ -28,7 +30,7 @@ public class AdventureRushMaster {
 			
 			Player p = arp.getPlayer();
 			
-			if (p != null && p.isOnline()) {
+			if (p != null && p.getGameMode() == GameMode.SURVIVAL && p.isOnline()) {
 				
 				int world = (int) ((30+p.getLocation().getX())/1000);
 				float percent = (float) ((p.getLocation().getX()%1000)/10f);
