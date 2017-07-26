@@ -1,23 +1,32 @@
 package gunpvp.listener;
 
-import java.util.Vector;
-
-import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-
 import com.shampaggon.crackshot.events.WeaponHitBlockEvent;
-
 import gunpvp.util.Action;
 import gunpvp.util.Timer;
 import net.minecraft.server.v1_12_R1.BlockPosition;
 import net.minecraft.server.v1_12_R1.PacketPlayOutBlockBreakAnimation;
+import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.ProjectileHitEvent;
+
+import java.util.Vector;
 
 public class ProjectileHitListener extends Listener {
 	
 	private Vector<HittedBlock> blocks = new Vector<>();
-	
+
+    @EventHandler
+    public void onProjectileHit(ProjectileHitEvent e) {
+        if (e.getEntity() instanceof Arrow) {
+            if (e.getHitBlock() != null || e.getHitEntity() != null) {
+                e.getEntity().remove();
+            }
+        }
+    }
+
 	@EventHandler
 	public void BreakAnimation(WeaponHitBlockEvent e) {
 		
