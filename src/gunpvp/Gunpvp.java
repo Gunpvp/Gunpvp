@@ -53,6 +53,8 @@ public class Gunpvp extends JavaPlugin {
 			}
 		}, 0, 1);
 		
+		Bukkit.getWorld("AdventureRush").setTime(18000);
+		
 	}
 	
 	@Override
