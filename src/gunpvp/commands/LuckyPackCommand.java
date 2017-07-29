@@ -3,6 +3,8 @@ package gunpvp.commands;
 import gunpvp.chestlottery.LuckyPack;
 import gunpvp.data.Chests;
 import gunpvp.data.DataManager;
+import gunpvp.data.Rank;
+import gunpvp.permissions.PermissionHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,9 +12,12 @@ import org.bukkit.entity.Player;
 public class LuckyPackCommand extends Command {
 
     private static final String[] packNames = {"normal", "rare", "special", "op"};
+    private static final Rank.RankEnum[] ALLOWED_RANKS = {Rank.RankEnum.ADMIN};
+    private static final String PERMISSION_NAME = "LUCKY_PACK_EDIT_PERMISSION";
 
     protected LuckyPackCommand() {
         super("luckypacks");
+        PermissionHandler.addPermission(PERMISSION_NAME, ALLOWED_RANKS);
     }
 
     @Override
@@ -20,7 +25,7 @@ public class LuckyPackCommand extends Command {
 
         String lowerCaseCMD = command.getName().toLowerCase();
 
-        if (commandSender.isOp()) {
+        if (commandSender instanceof Player && PermissionHandler.isPlayerAllowed((Player) commandSender, PERMISSION_NAME)) {
             if (lowerCaseCMD.equals("luckypacks") || lowerCaseCMD.equals("lp") || lowerCaseCMD.equals("packs")) {
                 if (args.length == 2 && args[0].equalsIgnoreCase("show")) {
                     Player p = null;

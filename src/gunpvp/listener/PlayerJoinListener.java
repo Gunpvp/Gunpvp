@@ -1,16 +1,17 @@
 package gunpvp.listener;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
-
 import gunpvp.data.DataManager;
+import gunpvp.data.PlayerData;
 import gunpvp.inventories.Inventories;
+import gunpvp.permissions.PermissionHandler;
 import gunpvp.scoreboard.GunpvpScoreboard;
 import gunpvp.util.Action;
 import gunpvp.util.Console;
 import gunpvp.util.Lobby;
 import gunpvp.util.Timer;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener extends Listener {
 
@@ -24,10 +25,13 @@ public class PlayerJoinListener extends Listener {
 		
 		Timer.sync(new Action() {
 			public void perform() {
-				
 				DataManager.add(p);
-				
-				Inventories.loadInventory(p);
+
+                PlayerData pd = DataManager.getData(p);
+
+                PermissionHandler.addPlayer(p, pd.getRank().getRank());
+
+                Inventories.loadInventory(p);
 				
 				Lobby.reset(p);
 				Lobby.send(p);
