@@ -11,13 +11,12 @@ import org.bukkit.entity.Player;
 
 public class LuckyPackCommand extends Command {
 
-    private static final String[] packNames = {"normal", "rare", "special", "op"};
-    private static final Rank.RankEnum[] ALLOWED_RANKS = {Rank.RankEnum.ADMIN};
+    private static final Rank.RankEnum ALLOWED_RANKS_LOWEST = Rank.RankEnum.MODERATOR;
     private static final String PERMISSION_NAME = "LUCKY_PACK_EDIT_PERMISSION";
 
     protected LuckyPackCommand() {
         super("luckypacks");
-        PermissionHandler.addPermission(PERMISSION_NAME, ALLOWED_RANKS);
+        PermissionHandler.addPermissionDefinedByLowest(PERMISSION_NAME, ALLOWED_RANKS_LOWEST);
     }
 
     @Override

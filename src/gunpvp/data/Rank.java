@@ -1,11 +1,10 @@
 package gunpvp.data;
 
 import gunpvp.util.Console;
-import gunpvp.util.Database;
 
 public class Rank {
 
-    public enum RankEnum {SPIELER, DONATOR, DEV, ADMIN}
+    public enum RankEnum {SPIELER, DONATOR, MODERATOR, DEVELOPER, OWNER}
 
     private String uuid;
     private RankEnum rank;
@@ -22,23 +21,19 @@ public class Rank {
         return rank;
     }
 
-    public String getColoredRank() {
+    public String getRankColor() {
         switch (rank) {
             case SPIELER:
-                return "§2" + rank.toString();
+                return "§a";
             case DONATOR:
-                return "§b" + rank.toString();
-            case DEV:
-                return "§6" + rank.toString();
-            case ADMIN:
-                return "§4" + rank.toString();
+                return "§b";
+            case MODERATOR:
+                return "§c";
+            case DEVELOPER:
+                return "§6";
+            case OWNER:
+                return "§5";
         }
         return "";
     }
-
-    public void editRank(RankEnum rankEnum) {
-        this.rank = rankEnum;
-        Database.execute("UPDATE 'GUNPVP_PLAYER_RANKS' SET 'RANK' = '" + this.rank + "' WHERE `UUID` = '" + this.uuid + "'");
-    }
-
 }

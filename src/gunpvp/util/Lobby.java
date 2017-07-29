@@ -1,13 +1,15 @@
 package gunpvp.util;
 
+import gunpvp.Titles;
+import gunpvp.classic.ClassicItems;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
-import gunpvp.Titles;
-import gunpvp.classic.ClassicItems;
+import static gunpvp.permissions.PermissionHandler.getRankColor;
+import static gunpvp.permissions.PermissionHandler.getRankEnum;
 
 public class Lobby {
 	
@@ -22,12 +24,11 @@ public class Lobby {
 		p.sendMessage("§8§l\\______[§2§l===§8§l|§2§l===§8§l]______/");
 		Titles.sendBar(p, "§a");
 		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 3, 1);
-		if (p.isOp()) p.setPlayerListName("§c" + p.getName());
-		else p.setPlayerListName("§a" + p.getName());
-		
-	}
-	
-	public static void reset(Player p) {
+        p.setPlayerListName(getRankColor(getRankEnum(p.getUniqueId().toString())) + p.getName());
+
+    }
+
+    public static void reset(Player p) {
 		
 		p.teleport(Locations.LOBBY);
 		p.setFireTicks(0);

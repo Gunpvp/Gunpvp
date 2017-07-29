@@ -74,8 +74,8 @@ public class Database {
 			createTable("CLASSIC", "UUID VARCHAR(100)", "GUNNER INT(100)", "RAMBO INT(100)", "PYRO INT(100)", "JUGGER INT(100)", "HEALER INT(100)", "BOMBER INT(100)","PRIMARY KEY (UUID)");
 			createTable("ADVENTURERUSH", "UUID VARCHAR(100)", "World INT", "STEPS INT", "PRIMARY KEY (UUID)");
 			createTable("CHESTS", "UUID VARCHAR(100)", "NORMAL INT", "RARE INT", "SPECIAL INT", "OP INT", "PRIMARY KEY (UUID)");
-            createTable("PLAYER_RANKS", "UUID VARCHAR(100)", "RANK ENUM('SPIELER', 'DONATOR', 'DEV', 'ADMIN')", "PRIMARY KEY (UUID)");
-        }
+			createTable("PLAYER_RANKS", "UUID VARCHAR(100)", "RANK ENUM('SPIELER', 'DONATOR', 'MODERATOR', 'DEVELOPER', 'OWNER')", "PRIMARY KEY (UUID)");
+		}
 	}
 	
 	public static void createTable(String name, String... params) {

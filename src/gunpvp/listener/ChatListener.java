@@ -1,11 +1,13 @@
 package gunpvp.listener;
 
+import gunpvp.data.DataManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import gunpvp.data.DataManager;
+import static gunpvp.permissions.PermissionHandler.getRankColor;
+import static gunpvp.permissions.PermissionHandler.getRankEnum;
 
 public class ChatListener extends Listener {
 	
@@ -27,13 +29,11 @@ public class ChatListener extends Listener {
 			}
 			for (Player all : Bukkit.getOnlinePlayers()) {
 				if (DataManager.getData(all).getSettings().hasChatEnabled()) {
-					if (e.getPlayer().isOp()) {
-						all.sendMessage("§8[§c" + world + "§8] > §c" + e.getPlayer().getName() + "§8 : §7" + e.getMessage());
-					} else {
-						all.sendMessage("§8[§a" + world + "§8] > §a" + e.getPlayer().getName() + "§8 : §7" + e.getMessage());
-					}
-				}
-			}
+                    all.sendMessage("§8[§c" + world + "§8] > §c" +
+                            getRankColor(getRankEnum(e.getPlayer().getUniqueId().toString())) +
+                            e.getPlayer().getName() + "§8 : §7" + e.getMessage());
+                }
+            }
 		} else e.getPlayer().sendMessage("§8[§2Gunpvp§8] §cDie CHAT-Funktion ist deaktiviert.");
 	}
 	
