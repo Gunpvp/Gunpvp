@@ -7,14 +7,16 @@ public class PlayerData {
 	private Classic classic;
 	private AdventureRush adventurerush;
 	private Chests chests;
-	
-	protected PlayerData(Stats stats, Settings settings, Classic classic, AdventureRush adventurerush, Chests chests) {
-		this.stats = stats;
+    private Rank rank;
+
+    protected PlayerData(Stats stats, Settings settings, Classic classic, AdventureRush adventurerush, Chests chests, Rank rank) {
+        this.stats = stats;
 		this.settings = settings;
 		this.classic = classic;
 		this.adventurerush = adventurerush;
 		this.chests = chests;
-	}
+        this.rank = rank;
+    }
 
 	public Stats getStats() {
 		return stats;
@@ -35,4 +37,9 @@ public class PlayerData {
 	public Chests getChests() {
 		return chests;
 	}
+
+    public Rank getRank() {
+        return rank;
+    }
+
 }

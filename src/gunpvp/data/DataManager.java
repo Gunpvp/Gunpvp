@@ -1,14 +1,13 @@
 package gunpvp.data;
 
+import gunpvp.util.Console;
+import gunpvp.util.Database;
+import org.bukkit.entity.Player;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.bukkit.entity.Player;
-
-import gunpvp.util.Console;
-import gunpvp.util.Database;
 
 public class DataManager {
 	
@@ -37,6 +36,7 @@ public class DataManager {
 					Database.execute("INSERT INTO GUNPVP_CLASSIC(UUID,GUNNER,RAMBO,PYRO,JUGGER,HEALER,BOMBER) VALUES ('"+p.getUniqueId().toString()+"', '0', '0', '0', '0', '0', '0')");
 					Database.execute("INSERT INTO GUNPVP_ADVENTURERUSH(UUID,WORLD,STEPS) VALUES ('"+p.getUniqueId().toString()+"', '0', '0')");
 					Database.execute("INSERT INTO GUNPVP_CHESTS(UUID,NORMAL,RARE,SPECIAL,OP) VALUES ('"+p.getUniqueId().toString()+"',0,0,0,0)");
+                    Database.execute("INSERT INTO GUNPVP_PLAYER_RANKS(UUID,RANK) VALUES ('" + p.getUniqueId().toString() + "','" + Rank.RankEnum.SPIELER.toString() + "')");
 
 					Console.info("Created new data for player " + p.getName());
 
@@ -80,12 +80,16 @@ public class DataManager {
                 getInt(p,"CHESTS","NORMAL"),
                 getInt(p,"CHESTS","RARE"),
                 getInt(p,"CHESTS","SPECIAL"),
-                getInt(p,"CHESTS","OP")
+                getInt(p, "CHESTS", "OP"));
+
+        Rank rank = new Rank(
+                p.getUniqueId().toString(),
+                Rank.RankEnum.valueOf(getString(p, "PLAYER_RANKS", "RANK"))
         );
 
 		Console.info("Players data was loaded!");
-		return new PlayerData(stats, settings, classic, adventurerush, chests);
-	}
+        return new PlayerData(stats, settings, classic, adventurerush, chests, rank);
+    }
 	
 	private static String getString(Player p, String database, String column) {
 		try {
@@ -106,8 +110,8 @@ public class DataManager {
 		}
 		return -1;
 	}
-	
-	private static boolean getBoolean(Player p, String database, String column) {
+
+    private static boolean getBoolean(Player p, String database, String column) {
 		try {
 			ResultSet result = Database.query("SELECT "+column+" FROM GUNPVP_"+database+" WHERE UUID= '" + p.getUniqueId().toString() + "'");
 			if((result.next())) return Boolean.parseBoolean(result.getString(column));
