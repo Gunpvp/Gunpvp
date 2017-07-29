@@ -1,4 +1,4 @@
-package gunpvp.chest_lottery;
+package gunpvp.chestlottery;
 
 import com.shampaggon.crackshot.CSUtility;
 import gunpvp.data.Chests;

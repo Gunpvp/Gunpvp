@@ -1,19 +1,18 @@
 package gunpvp.classic;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import gunpvp.chestlottery.LuckyPack;
+import gunpvp.data.DataManager;
+import gunpvp.data.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import gunpvp.chest_lottery.LuckyPack;
-import gunpvp.data.DataManager;
-import gunpvp.data.Settings;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ClassicKillstreak {
 	

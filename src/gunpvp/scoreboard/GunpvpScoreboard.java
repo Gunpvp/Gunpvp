@@ -1,8 +1,9 @@
 package gunpvp.scoreboard;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import gunpvp.data.DataManager;
+import gunpvp.data.PlayerData;
+import gunpvp.data.Stats;
+import gunpvp.util.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -11,9 +12,8 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
-import gunpvp.data.DataManager;
-import gunpvp.data.Stats;
-import gunpvp.util.Database;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class GunpvpScoreboard {
 	
@@ -37,10 +37,12 @@ public class GunpvpScoreboard {
 			case STATS:
 				
 				initScoreboard("§8[§2§lSTATS§8]");
-				
-				Stats stats = DataManager.getData(p).getStats();
-				
-				addElement(4, "§7Money§8: §a$" + stats.getMoney());
+
+                PlayerData data = DataManager.getData(p);
+                Stats stats = data.getStats();
+
+                addElement(5, "§7Rang§8: §a" + data.getRank().getColoredRank());
+                addElement(4, "§7Money§8: §a$" + stats.getMoney());
 				addElement(3, "§7Kills§8: §a" + stats.getKills());
 				addElement(2, "§7Deaths§8: §a" + stats.getDeaths());
 				addElement(1, "§7KDR§8: §a" + stats.getKD());

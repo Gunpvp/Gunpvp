@@ -5,7 +5,7 @@ import gunpvp.adventurerush.AdventureRushSignListener;
 import gunpvp.adventurerush.AdventureRushZombieDeathListener;
 import gunpvp.arcade.ArcadeClickListener;
 import gunpvp.arcade.ArcadeDeathListener;
-import gunpvp.chest_lottery.LuckyPack;
+import gunpvp.chestlottery.LuckyPack;
 import gunpvp.classic.ClassicClickListener;
 import gunpvp.classic.ClassicDeathListener;
 import gunpvp.enderchest.EnderchestMaster;

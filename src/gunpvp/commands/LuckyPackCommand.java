@@ -1,6 +1,6 @@
 package gunpvp.commands;
 
-import gunpvp.chest_lottery.LuckyPack;
+import gunpvp.chestlottery.LuckyPack;
 import gunpvp.data.Chests;
 import gunpvp.data.DataManager;
 import org.bukkit.Bukkit;
