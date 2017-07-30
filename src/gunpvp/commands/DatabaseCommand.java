@@ -1,25 +1,32 @@
 package gunpvp.commands;
 
+import gunpvp.data.DataManager;
+import gunpvp.data.Rank;
+import gunpvp.util.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import gunpvp.data.DataManager;
-import gunpvp.util.Database;
+import static gunpvp.permissions.PermissionHandler.addPermissionDefinedByLowest;
+import static gunpvp.permissions.PermissionHandler.isPlayerAllowed;
 
 public class DatabaseCommand extends Command {
 
+    private static final Rank.RankEnum LOWEST_RANK_ALLOWED = Rank.RankEnum.DEVELOPER;
+    private static final String PERMISSION_NAME = "DATABASE_COMMAND_PERMISSION";
+
 	protected DatabaseCommand() {
 		super("database");
-	}
+        addPermissionDefinedByLowest(PERMISSION_NAME, LOWEST_RANK_ALLOWED);
+    }
 
 	@Override
 	public boolean onCommand(CommandSender sender, org.bukkit.command.Command cmd, String name, String[] args) {
 		
 		name = name.toLowerCase();
-		
-		if (sender.isOp()) {
-			if (cmd.getName().equals("database") || cmd.getName().equals("db")) {
+
+        if (sender instanceof Player && (isPlayerAllowed((Player) sender, PERMISSION_NAME))) {
+            if (cmd.getName().equals("database") || cmd.getName().equals("db")) {
 				
 				if (args.length==2 || args.length==3) {
 					
