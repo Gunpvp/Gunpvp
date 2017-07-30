@@ -106,11 +106,11 @@ public class PermissionHandler {
             case DONATOR:
                 return "§b";
             case MODERATOR:
-                return "§c";
+                return "§5";
             case DEVELOPER:
                 return "§6";
             case OWNER:
-                return "§5";
+                return "§c";
         }
         return "";
     }
