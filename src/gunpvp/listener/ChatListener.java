@@ -29,8 +29,8 @@ public class ChatListener extends Listener {
 			}
 			for (Player all : Bukkit.getOnlinePlayers()) {
 				if (DataManager.getData(all).getSettings().hasChatEnabled()) {
-                    all.sendMessage("§8[§c" + world + "§8] > §c" +
-                            getRankColor(getRankEnum(e.getPlayer().getUniqueId().toString())) +
+					all.sendMessage("§8[" + getRankColor(getRankEnum(e.getPlayer().getUniqueId().toString())) + world + "§8] > §c" +
+							getRankColor(getRankEnum(e.getPlayer().getUniqueId().toString())) +
                             e.getPlayer().getName() + "§8 : §7" + e.getMessage());
                 }
             }
