@@ -18,8 +18,9 @@ public class Commands {
 		new SQLCommand();
 		new LuckyPackCommand();
 		new ARCommand();
-		
-		Console.info("loaded commands!");
+        new RankChangeCommand();
+
+        Console.info("loaded commands!");
 	}
 	
 }

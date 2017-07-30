@@ -14,9 +14,9 @@ import static gunpvp.permissions.PermissionHandler.getRankEnum;
 public class Lobby {
 	
 	public static void send(Player p) {
-		
-		Titles.sendTitle(p, "§2Gunpvp", "§7Willkommen §a" + p.getName());
-		for (int n = 0; n<100; n++) p.sendMessage("§a");
+
+        Titles.sendTitle(p, "§2Gunpvp", "§7Willkommen " + getRankColor(getRankEnum(p.getUniqueId().toString())) + p.getName());
+        for (int n = 0; n<100; n++) p.sendMessage("§a");
 		p.sendMessage("§8§l\\______[§2§l===§8§l|§2§l===§8§l]______/");
 		p.sendMessage("");
 		p.sendMessage("  §2§lGunpvp   §8§l-   §7The Original");
