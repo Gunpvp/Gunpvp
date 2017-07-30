@@ -16,6 +16,7 @@ import gunpvp.inventories.Inventories;
 import gunpvp.listener.Listeners;
 import gunpvp.scoreboard.GunpvpScoreboard;
 import gunpvp.util.Action;
+import gunpvp.util.Console;
 import gunpvp.util.Database;
 import gunpvp.util.Locations;
 import gunpvp.util.Timer;
@@ -23,6 +24,7 @@ import gunpvp.util.Timer;
 public class Gunpvp extends JavaPlugin {
 	
 	private static Gunpvp plugin;
+	private static int change_time_task;
 	
 	/**
 	 * 
@@ -53,7 +55,15 @@ public class Gunpvp extends JavaPlugin {
 			}
 		}, 0, 1);
 		
-		Bukkit.getWorld("AdventureRush").setTime(18000);
+		change_time_task = Timer.repeat(() -> {
+			
+			if (Bukkit.getWorld("AdventureRush") != null) {
+				Bukkit.getWorld("AdventureRush").setTime(18000);
+				Timer.cancel(change_time_task);
+				Console.info("Succesfully set time in map AdventureRush");
+			}
+			
+		}, 20, 20);
 		
 	}
 	
