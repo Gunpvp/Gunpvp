@@ -22,13 +22,17 @@ import org.bukkit.entity.Zombie;
 public class AdventureRushSpawner {
 	
 	private static List<SpawnLocation> spawn_locs = new ArrayList<>();
-	private static World world = Bukkit.getWorld("AdventureRush");
+	private static World world;
 	
 	/**
 	 * @param world
 	 * @param percent
 	 */
 	public static void spawnCreatures(Player p, int world, float percent) {
+		
+		if (AdventureRushSpawner.world == null) {
+			AdventureRushSpawner.world = Bukkit.getWorld("AdventureRush");
+		}
 		
 		for (SpawnLocation spawn_loc : spawn_locs) {
 			int x = ((int)spawn_loc.getLocation().getX());
