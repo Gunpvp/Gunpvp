@@ -1,11 +1,9 @@
 package gunpvp.chestlottery;
 
-import com.shampaggon.crackshot.CSUtility;
-import gunpvp.data.Chests;
-import gunpvp.data.DataManager;
-import gunpvp.listener.Listener;
-import gunpvp.util.ArmorManager;
-import gunpvp.util.Items;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,9 +14,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.shampaggon.crackshot.CSUtility;
+
+import gunpvp.data.Chests;
+import gunpvp.data.DataManager;
+import gunpvp.listener.Listener;
+import gunpvp.util.ArmorManager;
+import gunpvp.util.Items;
 
 /**
  * Created by Thomas Langs on 16.07.2017.
@@ -64,7 +66,6 @@ public class LuckyPack extends Listener{
         if (e.getCurrentItem() != null && (e.getCurrentItem().getType() == standardMaterial ||
                 e.getCurrentItem().getType() == errorMaterial)) {
             e.setCancelled(true);
-            String displayName=e.getCurrentItem().getItemMeta().getDisplayName();
             buy(e);
         }
     }

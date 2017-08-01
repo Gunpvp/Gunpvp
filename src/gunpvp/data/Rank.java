@@ -6,11 +6,9 @@ public class Rank {
 
     public enum RankEnum {SPIELER, DONATOR, MODERATOR, DEVELOPER, OWNER}
 
-    private String uuid;
     private RankEnum rank;
 
     public Rank(String uuid, RankEnum rankEnum) {
-        this.uuid = uuid;
         this.rank = rankEnum;
         if (rankEnum != null) {
             Console.info(rank.toString());
