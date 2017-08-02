@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 public class Arena {
 	
+	private String name;
 	private int wave;
 	private World world;
 	private List<ZombiePlayer> players;
@@ -22,7 +23,8 @@ public class Arena {
 	 * 
 	 * @param world_name
 	 */
-	public Arena(String world_name) {
+	public Arena(String name, String world_name) {
+		this.name = name;
 		this.wave = 0;
 		this.world = Bukkit.getWorld(world_name);
 		this.players = new ArrayList<>();
@@ -48,6 +50,19 @@ public class Arena {
 		
 		ZombiePlayer zp = new ZombiePlayer(p);
 		players.add(zp);
+		
+		// TODO check if arena is joinable
+		
+	}
+	
+	/**
+	 * 
+	 * prepare for arena
+	 * 
+	 */
+	public void prepareForArena(Player p) {
+		
+		
 		
 	}
 	
@@ -107,6 +122,10 @@ public class Arena {
 	
 	public int getPlayerCount() {
 		return players.size();
+	}
+
+	public String getName() {
+		return name;
 	}
 	
 }

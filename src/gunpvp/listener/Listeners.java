@@ -12,6 +12,7 @@ import gunpvp.enderchest.EnderchestMaster;
 import gunpvp.items.Medipack;
 import gunpvp.settings.SettingsPanel;
 import gunpvp.util.Console;
+import gunpvp.zombie.ZombieClickListener;
 
 public class Listeners {
 	
@@ -54,6 +55,8 @@ public class Listeners {
 		new ShopListener();
 		new InteractListener();
 		new EnderchestMaster();
+		
+		new ZombieClickListener();
 		
 		Console.info("started listeners!");
 		
